@@ -18,5 +18,7 @@ Make a clear list of features that work/dont work
 
 ## Adventurer Subclasses
 
-replace this with your documentation for your two Adventurer subclasses. If you modify or replace the provided CodeWarrior class, please provide documentation for that as well.
-
+|Adventurer Subclasses |Attack            |Support             |Special                                            |
+|:---------------------|:-----------------|:-------------------|:--------------------------------------------------|
+|NecroMedian           |Low % based damage|Restore % of special|Set target's health to 1 or Very high % based damge|
+|Priest (name with pun)|Low damage        |Heal target         |Heal entire team and buff damage                   |
