@@ -13,7 +13,13 @@ public class Game{
   //Do not write over the blank areas where text will appear or parties will appear.
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 1, 1);
+    for (int i = 2; i < 28; i++){
+      //drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 1);
+      //drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 80);
+      drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), i, 1);
+    }
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 28, 1);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -22,7 +28,8 @@ public class Game{
   //use this method in your other text drawing methods to make things simpler.
   public static void drawText(String s,int startRow, int startCol){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
+    Text.go(startRow, startCol);
+    System.out.print(s);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -38,7 +45,22 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
+    while (height > 0){
+      if (text.length() > width){
+        drawText(text.substring(0, width), row, col);
+        text = text.substring(width);
+        row++; height--;
+      }
+      else {
+        for (int i = height; i > 0; i--){
+          for (int k = width; k > 0; k--){
+            drawText(" ", row+i-1, col+k-1);
+          }
+        }
+        drawText(text, row, col);
+        break;
+      }
+    }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
