@@ -18,7 +18,7 @@ Make a clear list of features that work/dont work
 
 ## Adventurer Subclasses
 
-|Adventurer Subclasses |Max HP    |Attack            |Support             |Special                                            |
-|:--------------------:|:--------:|:----------------:|:------------------:|:-------------------------------------------------:|
-|NecroMedian           |Max HP: 15|Low % based damage|Restore % of special|Set target's health to 1 or Very high % based damge|
-|Priest (name with pun)|Max HP: 20|Low damage        |Heal target         |Heal entire team and buff damage                   |
+|Adventurer Subclasses|Max HP    |Attack            |Support    |Special                                             |
+|:-------------------:|:--------:|:----------------:|:---------:|:--------------------------------------------------:|
+|Necromancer          |Max HP: 15|Low % based damage|Buff damage|Set target's health to 1 or Very high % based damage|
+|Priest               |Max HP: 20|Low damage        |Heal target|Heal entire team and buff damage                    |
