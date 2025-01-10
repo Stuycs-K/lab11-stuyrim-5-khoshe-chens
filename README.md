@@ -3,7 +3,19 @@
 
 ## Features
 
-Make a clear list of features that work/dont work
+:white_check_mark: drawBackground
+
+:white_check_mark: drawText
+
+:white_check_mark: TextBox
+
+:white_check_mark: createRandomAdventurer
+
+:white_check_mark: drawParty
+
+:white_check_mark: colorByPercent
+
+
 
 :white_check_mark: This feature works.
 
