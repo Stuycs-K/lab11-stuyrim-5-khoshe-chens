@@ -96,6 +96,16 @@ public class Game{
 
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
       //YOUR CODE HERE
+      for(int i = 0; i < party.size(); i++) {
+        Adventurer current = party.get(i);
+        //need to write getName method for all adventurers
+        drawText(current.getName(), 2, 26 * i + 1);
+        drawText("HP: " + current.getHP(), 3, 26 * i + 1);
+        String special = current.getSpecialName() + ": " + current.getSpecial();
+        drawText(special, 4, 26 * i + 1);
+
+      }
+
       /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     }
 
