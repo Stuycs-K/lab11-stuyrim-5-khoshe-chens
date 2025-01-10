@@ -7,6 +7,15 @@ public class Game{
 
   public static void main(String[] args) {
     run();
+    //System.out.println(colorByPercent(0, 20));
+    //System.out.println(colorByPercent(12, 20));
+    //System.out.println(colorByPercent(18, 20));
+    /*ArrayList<Adventurer> people = new ArrayList<Adventurer>(3);
+    people.add(new CodeWarrior("Bob"));
+    people.add(new CodeWarrior("Tim"));
+    people.add(new CodeWarrior("Ben"));
+    Text.clear();
+    drawParty(people,2);*/
   }
 
   //Display the borders of your screen that will not change.
@@ -15,9 +24,9 @@ public class Game{
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 1, 1);
     for (int i = 2; i < 28; i++){
-      //drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 1);
-      //drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 80);
-      drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), i, 1);
+      drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 1);
+      drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 80);
+      //drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), i, 1);
     }
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 28, 1);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -72,15 +81,16 @@ public class Game{
     public static Adventurer createRandomAdventurer(){
       Random random = new Random();
       int randomInt = random.nextInt(3);
-      if (randomInt == 1) {
+      if (randomInt == 0) {
         return new CodeWarrior("Bob", 25);
       }
       else if (randomInt == 1) {
-        return new Necromancer("Tim", 15);
+        //return new Necromancer("Tim", 15);
       }
       else {
-        return new Priest("Ben", 20);
+        //return new Priest("Ben", 20);
       }
+      return new CodeWarrior("Bob", 25);
     }
 
     /*Display a List of 2-4 adventurers on the rows row through row+3 (4 rows max)
@@ -98,11 +108,10 @@ public class Game{
       //YOUR CODE HERE
       for(int i = 0; i < party.size(); i++) {
         Adventurer current = party.get(i);
-        //need to write getName method for all adventurers
-        drawText(current.getName(), 2, 26 * i + 1);
-        drawText("HP: " + current.getHP(), 3, 26 * i + 1);
+        drawText(current.getName(), startRow, 26 * i + 2);
+        drawText("HP: " + colorByPercent(current.getHP(), current.getmaxHP()), startRow + 1, 26 * i + 2);
         String special = current.getSpecialName() + ": " + current.getSpecial();
-        drawText(special, 4, 26 * i + 1);
+        drawText(special, startRow + 2, 26 * i + 2);
 
       }
 
@@ -117,9 +126,9 @@ public class Game{
     // under 25% : red
     // under 75% : yellow
     // otherwise : white
-    String red = Text.colorize(hp, RED);
-    String yellow = Text.colorize(hp, YELLOW);
-    String white = Text.colorize(hp, WHITE);
+    String red = Text.colorize("" +hp, Text.RED + Text.BRIGHT);
+    String yellow = Text.colorize("" +hp, Text.YELLOW + Text.BRIGHT);
+    String white = Text.colorize("" +hp, Text.WHITE);
     float percent = (float) hp / maxHP;
     if (percent < 0.25) {
       return String.format("%2s", red+"")+"/"+String.format("%2s", maxHP+"");
