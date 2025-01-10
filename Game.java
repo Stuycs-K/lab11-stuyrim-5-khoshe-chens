@@ -117,6 +117,16 @@ public class Game{
     // under 25% : red
     // under 75% : yellow
     // otherwise : white
+    String red = Text.colorize(hp, RED);
+    String yellow = Text.colorize(hp, YELLOW);
+    String white = Text.colorize(hp, WHITE);
+    float percent = (float) hp / maxHP;
+    if (percent < 0.25) {
+      return String.format("%2s", red+"")+"/"+String.format("%2s", maxHP+"");
+    }
+    else if (percent < 0.75) {
+      return String.format("%2s", yellow+"")+"/"+String.format("%2s", maxHP+"");
+    }
     return output;
   }
 
