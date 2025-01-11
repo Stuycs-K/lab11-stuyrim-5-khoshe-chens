@@ -15,7 +15,7 @@ public class Game{
     people.add(new CodeWarrior("Tim"));
     people.add(new CodeWarrior("Ben"));
     Text.clear();
-    drawParty(people,2);*/
+    drawScreen(people, people);*/
   }
 
   //Display the borders of your screen that will not change.
@@ -23,11 +23,21 @@ public class Game{
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 1, 1);
+    
     for (int i = 2; i < 28; i++){
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 1);
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 80);
+      if (!(i > 5 && i < 24)){
+        drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 27);
+        drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 53);
+      } else {
+        drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 40);
+      }
       //drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), i, 1);
     }
+
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 5, 1);
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 24, 1);
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 28, 1);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
@@ -108,10 +118,10 @@ public class Game{
       //YOUR CODE HERE
       for(int i = 0; i < party.size(); i++) {
         Adventurer current = party.get(i);
-        drawText(current.getName(), startRow, 26 * i + 2);
-        drawText("HP: " + colorByPercent(current.getHP(), current.getmaxHP()), startRow + 1, 26 * i + 2);
+        drawText(current.getName(), startRow, 26 * i + 3);
+        drawText("HP: " + colorByPercent(current.getHP(), current.getmaxHP()), startRow + 1, 26 * i + 3);
         String special = current.getSpecialName() + ": " + current.getSpecial();
-        drawText(special, startRow + 2, 26 * i + 2);
+        drawText(special, startRow + 2, 26 * i + 3);
 
       }
 
@@ -146,13 +156,15 @@ public class Game{
   //Display the party and enemies
   //Do not write over the blank areas where text will appear.
   //Place the cursor at the place where the user will by typing their input at the end of this method.
-  public static void drawScreen(){
+  public static void drawScreen(ArrayList<Adventurer> playerParty, ArrayList<Adventurer> enemyParty){
 
     drawBackground();
 
-    //draw player party
+    drawParty(playerParty, 2);
 
-    //draw enemy party
+    drawParty(playerParty, 25);
+
+    Text.go(28, 1);
 
   }
 
@@ -205,7 +217,7 @@ public class Game{
     //Draw the window border
 
     //You can add parameters to draw screen!
-    drawScreen();//initial state.
+    drawScreen(party, enemies);//initial state.
 
     //Main loop
 
@@ -291,7 +303,7 @@ public class Game{
       }
 
       //display the updated screen after input has been processed.
-      drawScreen();
+      drawScreen(party, enemies);
 
 
     }//end of main game loop
