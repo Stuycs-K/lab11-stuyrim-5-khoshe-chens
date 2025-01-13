@@ -284,7 +284,20 @@ public class Game{
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          //YOUR CODE HERE
+          TextBox(6, 2, 38, 2, "Who will "+party.get(whichPlayer)+" support?");
+
+          if(input.equals(party.get(1).toString())){
+            party.get(whichPlayer).support(enemies.get(1));
+          }else if(input.equals(party.get(2).toString())){
+            party.get(whichPlayer).support(enemies.get(2));
+          }
+          else if(input.equals(party.get(3).toString())){
+            party.get(whichPlayer).support(enemies.get(3));
+          }else{
+            TextBox(6, 2, 38, 2, "Please enter a valid ally name");
+            continue;
+          }
+
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
 
