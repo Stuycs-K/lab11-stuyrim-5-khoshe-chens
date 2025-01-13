@@ -10,13 +10,13 @@ public class Game{
     //System.out.println(colorByPercent(0, 20));
     //System.out.println(colorByPercent(12, 20));
     //System.out.println(colorByPercent(18, 20));
-    /*ArrayList<Adventurer> people = new ArrayList<Adventurer>(3);
+    ArrayList<Adventurer> people = new ArrayList<Adventurer>(3);
     people.add(new CodeWarrior("Bob"));
     people.add(new CodeWarrior("Tim"));
     people.add(new CodeWarrior("Ben"));
     people.get(0).setHP(5);
     Text.clear();
-    drawScreen(people, people);*/
+    drawScreen(people, people);
   }
 
   //Display the borders of your screen that will not change.
@@ -24,7 +24,7 @@ public class Game{
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 1, 1);
-    
+
     for (int i = 2; i < 28; i++){
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 1);
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 80);
