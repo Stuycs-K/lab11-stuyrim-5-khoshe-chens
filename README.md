@@ -15,6 +15,8 @@
 
 :white_check_mark: colorByPercent
 
+:question: drawScreen
+
 
 
 :white_check_mark: This feature works.
