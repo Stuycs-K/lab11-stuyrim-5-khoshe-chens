@@ -25,10 +25,10 @@ public class Game{
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 1, 1);
 
-    for (int i = 2; i < 28; i++){
+    for (int i = 2; i < 29; i++){
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 1);
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 80);
-      if (!(i > 5 && i < 24)){
+      if (!(i > 5 && i < 25)){
         drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 27);
         drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 53);
       } else {
@@ -38,8 +38,8 @@ public class Game{
     }
 
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 5, 1);
-    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 24, 1);
-    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 28, 1);
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 25, 1);
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 29, 1);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -163,9 +163,9 @@ public class Game{
 
     drawParty(playerParty, 2);
 
-    drawParty(playerParty, 25);
+    drawParty(playerParty, 26);
 
-    Text.go(29, 1);
+    Text.go(30, 1);
 
   }
 
@@ -179,7 +179,7 @@ public class Game{
       String input = in.nextLine();
 
       //clear the text that was written
-      Text.go(29, 1);
+      Text.go(30, 1);
 
       return input;
   }
@@ -187,7 +187,7 @@ public class Game{
   public static void quit(){
     Text.reset();
     Text.showCursor();
-    Text.go(32,1);
+    Text.go(30,1);
   }
 
   public static void run(){
