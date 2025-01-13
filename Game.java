@@ -248,26 +248,36 @@ public class Game{
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           TextBox(6, 2, 38, 2, "Who will "+party.get(whichPlayer)+" attack?");
 
-          if(input.equals("attack") || input.equals("a")){
-
-            if(input.equals(enemies.get(1))){
-              party.get(whichPlayer).attack(enemies.get(1));
-            }else if(input.equals(enemies.get(2))){
-              party.get(whichPlayer).attack(enemies.get(2));
-            }
-            else if(input.equals(enemies.get(3))){
-              party.get(whichPlayer).attack(enemies.get(3));
-            }else{
-              TextBox(6, 2, 38, 2, "Please enter a valid enemy name");
-              continue;
-            }
-
+          if(input.equals(enemies.get(1).toString())){
+            party.get(whichPlayer).attack(enemies.get(1));
+          }else if(input.equals(enemies.get(2).toString())){
+            party.get(whichPlayer).attack(enemies.get(2));
           }
+          else if(input.equals(enemies.get(3).toString())){
+            party.get(whichPlayer).attack(enemies.get(3));
+          }else{
+            TextBox(6, 2, 38, 2, "Please enter a valid enemy name");
+            continue;
+          }
+
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.equals("special") || input.equals("sp")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          //YOUR CODE HERE
+          TextBox(6, 2, 38, 2, "Who will "+party.get(whichPlayer)+" special attack?");
+
+          if(input.equals(enemies.get(1).toString())){
+            party.get(whichPlayer).specialAttack(enemies.get(1));
+          }else if(input.equals(enemies.get(2).toString())){
+            party.get(whichPlayer).specialAttack(enemies.get(2));
+          }
+          else if(input.equals(enemies.get(3).toString())){
+            party.get(whichPlayer).specialAttack(enemies.get(3));
+          }else{
+            TextBox(6, 2, 38, 2, "Please enter a valid enemy name");
+            continue;
+          }
+
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("su ") || input.startsWith("support ")){
