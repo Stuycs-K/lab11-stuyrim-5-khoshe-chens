@@ -6,17 +6,17 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    //run();
+    run();
     //System.out.println(colorByPercent(0, 20));
     //System.out.println(colorByPercent(12, 20));
     //System.out.println(colorByPercent(18, 20));
-    ArrayList<Adventurer> people = new ArrayList<Adventurer>(3);
+    /*ArrayList<Adventurer> people = new ArrayList<Adventurer>(3);
     people.add(new CodeWarrior("Bob"));
     people.add(new CodeWarrior("Tim"));
     people.add(new CodeWarrior("Ben"));
     people.get(0).setHP(5);
     Text.clear();
-    drawScreen(people, people);
+    drawScreen(people, people);*/
   }
 
   //Display the borders of your screen that will not change.
