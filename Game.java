@@ -25,10 +25,10 @@ public class Game{
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 1, 1);
 
-    for (int i = 2; i < 29; i++){
+    for (int i = 2; i < 28; i++){
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 1);
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 80);
-      if (!(i > 5 && i < 25)){
+      if (!(i > 5 && i < 24)){
         drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 27);
         drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 53);
       } else {
@@ -38,8 +38,8 @@ public class Game{
     }
 
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 5, 1);
-    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 25, 1);
-    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 29, 1);
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 24, 1);
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 28, 1);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -163,15 +163,15 @@ public class Game{
 
     drawParty(playerParty, 2);
 
-    drawParty(playerParty, 26);
+    drawParty(playerParty, 25);
 
-    Text.go(30, 1);
+    Text.go(29, 1);
 
   }
 
-  public static String userInput(Scanner in){
+  public static String userInput(Scanner in, int col){
       //Move cursor to prompt location
-      Text.go(30, 1);
+      Text.go(29, col);
 
       //show cursor
       Text.showCursor();
@@ -179,7 +179,7 @@ public class Game{
       String input = in.nextLine();
 
       //clear the text that was written
-      Text.go(30, 1);
+      Text.go(29, 1);
 
       return input;
   }
@@ -230,15 +230,15 @@ public class Game{
     //Main loop
 
     //display this prompt at the start of the game.
-    String preprompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-    TextBox(6, 2, 38, 2, preprompt);
+    String preprompt = "Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
+    TextBox(29, 1, 80, 1, preprompt);
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
-      input = userInput(in);
+      input = userInput(in, preprompt.length() + 2);
 
       //example debug statment
-      TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
+      //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
@@ -246,36 +246,52 @@ public class Game{
         //Process user input for the last Adventurer:
         if(input.equals("attack") || input.equals("a")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          TextBox(6, 2, 38, 2, "Who will "+party.get(whichPlayer)+" attack?");
 
-          if(input.equals(enemies.get(1).toString())){
-            party.get(whichPlayer).attack(enemies.get(1));
-          }else if(input.equals(enemies.get(2).toString())){
-            party.get(whichPlayer).attack(enemies.get(2));
-          }
-          else if(input.equals(enemies.get(3).toString())){
-            party.get(whichPlayer).attack(enemies.get(3));
-          }else{
-            TextBox(6, 2, 38, 2, "Please enter a valid enemy name");
-            continue;
+          prompt = "Who will "+party.get(whichPlayer)+" attack?";
+          TextBox(29, 1, 80, 1, prompt);
+
+          while (true){
+            input = userInput(in, prompt.length() + 2);
+
+            if(input.equals(enemies.get(1).toString())){
+              party.get(whichPlayer).attack(enemies.get(1));
+            }else if(input.equals(enemies.get(2).toString())){
+              party.get(whichPlayer).attack(enemies.get(2));
+            }
+            else if(input.equals(enemies.get(3).toString())){
+              party.get(whichPlayer).attack(enemies.get(3));
+            }else{
+              prompt = "Please enter a valid enemy name";
+              TextBox(29, 1, 80, 1, prompt);
+              continue;
+            }
+            break;
           }
 
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.equals("special") || input.equals("sp")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          TextBox(6, 2, 38, 2, "Who will "+party.get(whichPlayer)+" special attack?");
 
-          if(input.equals(enemies.get(1).toString())){
-            party.get(whichPlayer).specialAttack(enemies.get(1));
-          }else if(input.equals(enemies.get(2).toString())){
-            party.get(whichPlayer).specialAttack(enemies.get(2));
-          }
-          else if(input.equals(enemies.get(3).toString())){
-            party.get(whichPlayer).specialAttack(enemies.get(3));
-          }else{
-            TextBox(6, 2, 38, 2, "Please enter a valid enemy name");
-            continue;
+          prompt = "Who will "+party.get(whichPlayer)+" special attack?";
+          TextBox(29, 1, 80, 1, prompt);
+
+          while (true){
+            input = userInput(in, prompt.length() + 2);
+
+            if(input.equals(enemies.get(1).toString())){
+              party.get(whichPlayer).specialAttack(enemies.get(1));
+            }else if(input.equals(enemies.get(2).toString())){
+              party.get(whichPlayer).specialAttack(enemies.get(2));
+            }
+            else if(input.equals(enemies.get(3).toString())){
+              party.get(whichPlayer).specialAttack(enemies.get(3));
+            }else{
+              prompt = "Please enter a valid enemy name";
+              TextBox(29, 1, 80, 1, prompt);
+              continue;
+            }
+            break;
           }
 
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -284,18 +300,26 @@ public class Game{
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          TextBox(6, 2, 38, 2, "Who will "+party.get(whichPlayer)+" support?");
 
-          if(input.equals(party.get(1).toString())){
-            party.get(whichPlayer).support(enemies.get(1));
-          }else if(input.equals(party.get(2).toString())){
-            party.get(whichPlayer).support(enemies.get(2));
-          }
-          else if(input.equals(party.get(3).toString())){
-            party.get(whichPlayer).support(enemies.get(3));
-          }else{
-            TextBox(6, 2, 38, 2, "Please enter a valid ally name");
-            continue;
+          prompt = "Who will "+party.get(whichPlayer)+" support?";
+          TextBox(29, 1, 80, 1, preprompt);
+
+          while (true){
+            input = userInput(in, prompt.length() + 2);
+
+            if(input.equals(party.get(1).toString())){
+              party.get(whichPlayer).support(enemies.get(1));
+            }else if(input.equals(party.get(2).toString())){
+              party.get(whichPlayer).support(enemies.get(2));
+            }
+            else if(input.equals(party.get(3).toString())){
+              party.get(whichPlayer).support(enemies.get(3));
+            }else{
+              prompt = "Please enter a valid ally name";
+              TextBox(29, 1, 80, 1, prompt);
+              continue;
+            }
+            break;
           }
 
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
