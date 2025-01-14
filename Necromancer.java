@@ -24,4 +24,21 @@ public class Necromancer extends Adventurer{
 
   }
 
+  //attack/support/special
+
+  //Low percent based damage (deals random dmg from 0.1%-0.2% on opponent)
+  public String attack(Adventurer other){
+    return "";
+  }
+
+  //set targets health to 0.3 of what it originally was (rounds to integer if there is decimal)
+  public String specialAttack(Adventurer other){
+    return "";
+  }
+
+  //buffs damage of target by 3 hp (doesnt restore special)
+  public String support(Adventurer other){
+    return "";
+  }
+
 }
