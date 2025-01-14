@@ -246,82 +246,19 @@ public class Game{
         //Process user input for the last Adventurer:
         if(input.equals("attack") || input.equals("a")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-
-          prompt = "Who will "+party.get(whichPlayer)+" attack?";
-          TextBox(29, 1, 80, 1, prompt);
-
-          while (true){
-            input = userInput(in, prompt.length() + 2);
-
-            if(input.equals(enemies.get(1).toString())){
-              party.get(whichPlayer).attack(enemies.get(1));
-            }else if(input.equals(enemies.get(2).toString())){
-              party.get(whichPlayer).attack(enemies.get(2));
-            }
-            else if(input.equals(enemies.get(3).toString())){
-              party.get(whichPlayer).attack(enemies.get(3));
-            }else{
-              prompt = "Please enter a valid enemy name";
-              TextBox(29, 1, 80, 1, prompt);
-              continue;
-            }
-            break;
-          }
-
+          //YOUR CODE HERE
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.equals("special") || input.equals("sp")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-
-          prompt = "Who will "+party.get(whichPlayer)+" special attack?";
-          TextBox(29, 1, 80, 1, prompt);
-
-          while (true){
-            input = userInput(in, prompt.length() + 2);
-
-            if(input.equals(enemies.get(1).toString())){
-              party.get(whichPlayer).specialAttack(enemies.get(1));
-            }else if(input.equals(enemies.get(2).toString())){
-              party.get(whichPlayer).specialAttack(enemies.get(2));
-            }
-            else if(input.equals(enemies.get(3).toString())){
-              party.get(whichPlayer).specialAttack(enemies.get(3));
-            }else{
-              prompt = "Please enter a valid enemy name";
-              TextBox(29, 1, 80, 1, prompt);
-              continue;
-            }
-            break;
-          }
-
+          //YOUR CODE HERE
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("su ") || input.startsWith("support ")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-
-          prompt = "Who will "+party.get(whichPlayer)+" support?";
-          TextBox(29, 1, 80, 1, preprompt);
-
-          while (true){
-            input = userInput(in, prompt.length() + 2);
-
-            if(input.equals(party.get(1).toString())){
-              party.get(whichPlayer).support(enemies.get(1));
-            }else if(input.equals(party.get(2).toString())){
-              party.get(whichPlayer).support(enemies.get(2));
-            }
-            else if(input.equals(party.get(3).toString())){
-              party.get(whichPlayer).support(enemies.get(3));
-            }else{
-              prompt = "Please enter a valid ally name";
-              TextBox(29, 1, 80, 1, prompt);
-              continue;
-            }
-            break;
-          }
-
+          //YOUR CODE HERE
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
 
@@ -334,7 +271,81 @@ public class Game{
           //This is a player turn.
           //Decide where to draw the following prompt:
           String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+          TextBox(29, 1, 80, 1, prompt);
+          input = userInput(in, prompt.length() + 2);
 
+          if(input.equals("attack") || input.equals("a")){
+
+            prompt = "Who will "+party.get(whichPlayer)+" attack?";
+            TextBox(29, 1, 80, 1, prompt);
+
+            while (true){
+              input = userInput(in, prompt.length() + 2);
+
+              if(input.equals(enemies.get(1).toString())){
+                party.get(whichPlayer).attack(enemies.get(1));
+              }else if(input.equals(enemies.get(2).toString())){
+                party.get(whichPlayer).attack(enemies.get(2));
+              }
+              else if(input.equals(enemies.get(3).toString())){
+                party.get(whichPlayer).attack(enemies.get(3));
+              }else{
+                prompt = "Please enter a valid enemy name";
+                TextBox(29, 1, 80, 1, prompt);
+                continue;
+              }
+              break;
+            }
+
+          }
+          else if(input.equals("special") || input.equals("sp")){
+
+            prompt = "Who will "+party.get(whichPlayer)+" special attack?";
+            TextBox(29, 1, 80, 1, prompt);
+
+            while (true){
+              input = userInput(in, prompt.length() + 2);
+
+              if(input.equals(enemies.get(1).toString())){
+                party.get(whichPlayer).specialAttack(enemies.get(1));
+              }else if(input.equals(enemies.get(2).toString())){
+                party.get(whichPlayer).specialAttack(enemies.get(2));
+              }
+              else if(input.equals(enemies.get(3).toString())){
+                party.get(whichPlayer).specialAttack(enemies.get(3));
+              }else{
+                prompt = "Please enter a valid enemy name";
+                TextBox(29, 1, 80, 1, prompt);
+                continue;
+              }
+              break;
+            }
+
+          }
+          else if(input.startsWith("su ") || input.startsWith("support ")){
+
+            prompt = "Who will "+party.get(whichPlayer)+" support?";
+            TextBox(29, 1, 80, 1, preprompt);
+
+            while (true){
+              input = userInput(in, prompt.length() + 2);
+
+              if(input.equals(party.get(1).toString())){
+                party.get(whichPlayer).support(enemies.get(1));
+              }else if(input.equals(party.get(2).toString())){
+                party.get(whichPlayer).support(enemies.get(2));
+              }
+              else if(input.equals(party.get(3).toString())){
+                party.get(whichPlayer).support(enemies.get(3));
+              }else{
+                prompt = "Please enter a valid ally name";
+                TextBox(29, 1, 80, 1, prompt);
+                continue;
+              }
+              break;
+            }
+
+          }
 
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
