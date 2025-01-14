@@ -37,17 +37,29 @@ public class Priest extends Adventurer{
 
   //Low damage (deals random dmg from 1-3 on opponent)
   public String attack(Adventurer other){
-    return "";
+    int damage = (int) (Math.random()*3) + 1;
+    other.applyDamage(damage);
+    return this + " attacked " + other + " for " + damage + " damage.";
   }
 
   //heals its own team by 3 and buffs each persons damage (including own) by 2
-  public String specialAttack(Adventurer other){
+  public String specialAttack(ArrayList<Adventurer> other){
     return "";
   }
 
   //heals target by 5 hp (doesnt restore special)
   public String support(Adventurer other){
-    return "";
+    if(this == other) {
+      return this.support();
+    }
+    setHP(getHP() + 5);
+    return "Cast a spell to heal " + other + " by 5 hp.";
+  }
+
+  public String support(){
+    int hp = 5;
+    setHP(getHP() + hp);
+    return "Healed themselves for 5 HP";
   }
 
 
