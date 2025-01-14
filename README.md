@@ -17,6 +17,11 @@
 
 :question: drawScreen
 
+:question: userInput
+
+:white_check_mark: quit
+
+:question: run
 
 
 :white_check_mark: This feature works.
