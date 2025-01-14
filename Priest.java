@@ -3,24 +3,34 @@ public class Priest extends Adventurer{
   int mana, manaMax;
 
   public Priest(String name, int hp) {
+    super(name, hp);
+    manaMax = 20;
+    mana = manaMax/2;
+  }
 
+  public Priest(String name) {
+    this(name, 20);
+  }
+
+  public Priest() {
+    this("Jesus");
   }
   //add overloaded contructors if necessary
 
   public String getSpecialName() {
-    return "";
+    return "mana";
   }
 
   public int getSpecial() {
-    return 0;
+    return mana;
   }
 
   public int getSpecialMax() {
-    return 0;
+    return manaMax;
   }
 
   public void setSpecial(int n) {
-
+    mana = n;
   }
 
   //attack/support/special

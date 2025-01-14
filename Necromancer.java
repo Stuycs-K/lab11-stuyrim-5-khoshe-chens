@@ -3,25 +3,35 @@ public class Necromancer extends Adventurer{
   //necromancer special is called mana for now, is subject to change
   int mana, manaMax;
 
-  public Priest(String name, int hp) {
+  public Necromancer(String name, int hp) {
+    super(name, hp);
+    manaMax = 20;
+    mana = manaMax/2;
+  }
 
+  public Necromancer(String name) {
+    this(name, 25);
+  }
+
+  public Necromancer() {
+    this("Morty");
   }
   //add overloaded contructors if necessary
 
   public String getSpecialName() {
-    return "";
+    return "mana";
   }
 
   public int getSpecial() {
-    return 0;
+    return mana;
   }
 
   public int getSpecialMax() {
-    return 0;
+    return manaMax;
   }
 
   public void setSpecial(int n) {
-
+    mana = n;
   }
 
   //attack/support/special
