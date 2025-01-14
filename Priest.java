@@ -25,6 +25,21 @@ public class Priest extends Adventurer{
 
   //attack/support/special
 
+  //Low damage (deals random dmg from 1-3 on opponent)
+  public String attack(Adventurer other){
+    return "";
+  }
+
+  //heals its own team by 3 and buffs each persons damage (including own) by 2
+  public String specialAttack(Adventurer other){
+    return "";
+  }
+
+  //heals target by 5 hp (doesnt restore special)
+  public String support(Adventurer other){
+    return "";
+  }
+
 
 
 
