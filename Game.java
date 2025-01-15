@@ -180,7 +180,7 @@ public class Game{
       String input = in.nextLine();
 
       //clear the text that was written
-      Text.go(29, 2);
+      TextBox(29, 2, 78, 1, "");
 
       return input;
   }
@@ -240,7 +240,7 @@ public class Game{
       input = userInput(in);
 
       //example debug statment
-      //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
+      TextBox(10,2,30,5,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
@@ -256,12 +256,14 @@ public class Game{
 
             if(input.equals(enemies.get(1).getName())){
               party.get(whichPlayer).attack(enemies.get(1));
-            }else if(input.equals(enemies.get(2).getName())){
+            }
+            else if(input.equals(enemies.get(2).getName())){
               party.get(whichPlayer).attack(enemies.get(2));
             }
             else if(input.equals(enemies.get(3).getName())){
               party.get(whichPlayer).attack(enemies.get(3));
-            }else{
+            }
+            else{
               prompt = "Please enter a valid enemy name";
               TextBox(28, 2, 79, 1, prompt);
               continue;
@@ -280,12 +282,14 @@ public class Game{
 
             if(input.equals(enemies.get(1).getName())){
               party.get(whichPlayer).specialAttack(enemies.get(1));
-            }else if(input.equals(enemies.get(2).getName())){
+            }
+            else if(input.equals(enemies.get(2).getName())){
               party.get(whichPlayer).specialAttack(enemies.get(2));
             }
             else if(input.equals(enemies.get(3).getName())){
               party.get(whichPlayer).specialAttack(enemies.get(3));
-            }else{
+            }
+            else{
               prompt = "Please enter a valid enemy name";
               TextBox(28, 2, 78, 1, prompt);
               continue;
@@ -304,12 +308,14 @@ public class Game{
 
             if(input.equals(party.get(1).getName())){
               party.get(whichPlayer).support(enemies.get(1));
-            }else if(input.equals(party.get(2).getName())){
+            }
+            else if(input.equals(party.get(2).getName())){
               party.get(whichPlayer).support(enemies.get(2));
             }
             else if(input.equals(party.get(3).getName())){
               party.get(whichPlayer).support(enemies.get(3));
-            }else{
+            }
+            else{
               prompt = "Please enter a valid ally name";
               TextBox(28, 2, 78, 1, prompt);
               continue;
@@ -321,6 +327,7 @@ public class Game{
 
         //You should decide when you want to re-ask for user input
         //If no errors:
+        drawScreen(party, enemies);
         whichPlayer++;
 
 
