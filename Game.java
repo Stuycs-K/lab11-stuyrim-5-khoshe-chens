@@ -232,6 +232,9 @@ public class Game{
     String currentTurn = "";
     String pastTurn = "";
     String pastestTurn = "";
+    int enemyMove;
+    int enemyTarget;
+    Random rand = new Random();
     //Draw the window border
 
     //You can add parameters to draw screen!
@@ -348,7 +351,8 @@ public class Game{
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
-          prompt = "press enter to see monster's turn";
+          prompt = "Press enter to see monster's turn";
+          TextBox(28, 2, 78, 1, prompt);
 
           partyTurn = false;
           whichOpponent = 0;
@@ -361,12 +365,35 @@ public class Game{
         //enemy attacks a randomly chosen person with a randomly chosen attack.z`
         //Enemy action choices go here!
         /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-        //YOUR CODE HERE
+        enemyMove = rand.nextInt(3);
+
+        if (enemyMove == 0){
+          enemyTarget = rand.nextInt(party.size());
+
+          pastestTurn = pastTurn;
+          pastTurn = currentTurn;
+          currentTurn = enemies.get(whichOpponent).attack(party.get(enemyTarget));
+        }
+        else if (enemyMove == 1){
+          enemyTarget = rand.nextInt(enemies.size());
+
+          pastestTurn = pastTurn;
+          pastTurn = currentTurn;
+          currentTurn = enemies.get(whichOpponent).support(enemies.get(enemyTarget));
+        }
+        else {
+          enemyTarget = rand.nextInt(party.size());
+
+          pastestTurn = pastTurn;
+          pastTurn = currentTurn;
+          currentTurn = enemies.get(whichOpponent).specialAttack(party.get(enemyTarget));
+        }
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
 
         //Decide where to draw the following prompt:
-        prompt = "press enter to see next turn";
+        prompt = "Press enter to see next turn";
+        TextBox(28, 2, 78, 1, prompt);
 
         whichOpponent++;
 
@@ -381,11 +408,11 @@ public class Game{
         partyTurn=true;
         //display this prompt before player's turn
         prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+        TextBox(28, 2, 78, 1, prompt);
       }
 
       //display the updated screen after input has been processed.
       drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn);
-
 
     }//end of main game loop
 
