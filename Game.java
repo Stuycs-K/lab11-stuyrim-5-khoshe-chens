@@ -90,11 +90,11 @@ public class Game{
 
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
-    public static Adventurer createRandomAdventurer(){
+    public static Adventurer createRandomAdventurer(ArrayList<String> names){
       Random random = new Random();
       int randomInt = random.nextInt(3);
       if (randomInt == 0) {
-        return new CodeWarrior("Bob", 25);
+        return new CodeWarrior(names.remove(random.nextInt(names.size())), 25);
       }
       else if (randomInt == 1) {
         //return new Necromancer("Tim", 15);
@@ -102,7 +102,7 @@ public class Game{
       else {
         //return new Priest("Ben", 20);
       }
-      return new CodeWarrior("Bob", 25);
+      return new CodeWarrior(names.remove(random.nextInt(names.size())), 25);
     }
 
     /*Display a List of 2-4 adventurers on the rows row through row+3 (4 rows max)
@@ -162,7 +162,7 @@ public class Game{
 
     drawBackground();
 
-    drawParty(playerParty, 2);
+    drawParty(enemyParty, 2);
 
     drawParty(playerParty, 24);
 
@@ -202,25 +202,27 @@ public class Game{
     Text.hideCursor();
     Text.clear();
 
-
+    ArrayList<String> names = new ArrayList<>(10);
+    names.add("Bob"); names.add("Jeff"); names.add("Gerald"); names.add("George"); names.add("Juan");
+    names.add("Patrick"); names.add("Jim"); names.add("Reginald"); names.add("Donkey Kong"); names.add("Tim");
     //Things to attack:
     //Make an ArrayList of Adventurers and add 1-3 enemies to it.
     //If only 1 enemy is added it should be the boss class.
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
     ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    enemies.add(createRandomAdventurer());
-    enemies.add(createRandomAdventurer());
-    enemies.add(createRandomAdventurer());
+    enemies.add(createRandomAdventurer(names));
+    enemies.add(createRandomAdventurer(names));
+    enemies.add(createRandomAdventurer(names));
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     //Adventurers you control:
     //Make an ArrayList of Adventurers and add 2-4 Adventurers to it.
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    party.add(createRandomAdventurer());
-    party.add(createRandomAdventurer());
-    party.add(createRandomAdventurer());
+    party.add(createRandomAdventurer(names));
+    party.add(createRandomAdventurer(names));
+    party.add(createRandomAdventurer(names));
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     boolean partyTurn = true;
@@ -316,7 +318,7 @@ public class Game{
             input = userInput(in);
             if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){ break game; }
 
-            for (Adventurer target : enemies){
+            for (Adventurer target : party){
               if(input.equals(target.getName())){
                 pastestTurn = pastTurn;
                 pastTurn = currentTurn;
