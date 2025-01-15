@@ -57,8 +57,7 @@ public class Priest extends Adventurer{
   }
 
   public String support(){
-    int hp = 5;
-    setHP(getHP() + hp);
+    setHP(getHP() + 5);
     return "Healed themselves for 5 HP";
   }
 

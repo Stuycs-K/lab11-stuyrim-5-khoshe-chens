@@ -36,19 +36,35 @@ public class Necromancer extends Adventurer{
 
   //attack/support/special
 
-  //Low percent based damage (deals random dmg from 0.1%-0.2% on opponent)
+  //Low percent based damage (deals random dmg from 10%-20% on opponent)
   public String attack(Adventurer other){
+    float damage =  other.getHP() * ((int) (Math.random()*baseDmg) + 1) * 0.01 + 0.1;
+    other.applyDamage(damage);
+    return this + " attacked " + other + " for " + damage + " damage.";
     return "";
   }
 
   //set targets health to 0.3 of what it originally was (rounds to integer if there is decimal)
   public String specialAttack(Adventurer other){
-    return "";
+    if(this == other) {
+      return this.support();
+    }
+    setHP(getHP() + 5);
+    return "Cast a spell to heal " + other + " by 5 hp.";
   }
 
   //buffs damage of target by 3 hp (doesnt restore special)
   public String support(Adventurer other){
-    return "";
+    if(this == other) {
+      return this.support();
+    }
+    setDmg(getDmg() + 3);
+    return "Buffed " + other + " damage by 3.";
+  }
+
+  public String support(){
+    setDmg(getDmg() + 3);
+    return "Buffed their own damage by 3.";
   }
 
 }
