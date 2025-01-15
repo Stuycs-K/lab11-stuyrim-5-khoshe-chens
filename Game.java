@@ -158,13 +158,19 @@ public class Game{
   //Display the party and enemies
   //Do not write over the blank areas where text will appear.
   //Place the cursor at the place where the user will by typing their input at the end of this method.
-  public static void drawScreen(ArrayList<Adventurer> playerParty, ArrayList<Adventurer> enemyParty){
+  public static void drawScreen(ArrayList<Adventurer> playerParty, ArrayList<Adventurer> enemyParty, String currentTurn, String pastTurn, String pastestTurn){
 
     drawBackground();
 
     drawParty(playerParty, 2);
 
     drawParty(playerParty, 24);
+
+    TextBox(6, 2, 38, 6, currentTurn);
+
+    TextBox(12, 2, 38, 5, pastTurn);
+
+    TextBox(17, 2, 38, 6, pastestTurn);
 
     Text.go(29, 1);
 
@@ -223,10 +229,13 @@ public class Game{
     int turn = 0;
     String input = "";//blank to get into the main loop.
     Scanner in = new Scanner(System.in);
+    String currentTurn = "";
+    String pastTurn = "";
+    String pastestTurn = "";
     //Draw the window border
 
     //You can add parameters to draw screen!
-    drawScreen(party, enemies);//initial state.
+    drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn);//initial state.
 
     //Main loop
 
@@ -240,7 +249,7 @@ public class Game{
       input = userInput(in);
 
       //example debug statment
-      TextBox(10,2,30,5,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
+      //TextBox(10,2,30,5,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
@@ -258,7 +267,9 @@ public class Game{
 
             for (Adventurer target : enemies){
               if(input.equals(target.getName())){
-                party.get(whichPlayer).attack(target);
+                pastestTurn = pastTurn;
+                pastTurn = currentTurn;
+                currentTurn = party.get(whichPlayer).attack(target);
                 break attack;
               }
             }
@@ -280,7 +291,9 @@ public class Game{
 
             for (Adventurer target : enemies){
               if(input.equals(target.getName())){
-                party.get(whichPlayer).specialAttack(target);
+                pastestTurn = pastTurn;
+                pastTurn = currentTurn;
+                currentTurn = party.get(whichPlayer).specialAttack(target);
                 break specialattack;
               }
             }
@@ -290,7 +303,7 @@ public class Game{
           }
 
         }
-        else if(input.startsWith("su ") || input.startsWith("support ")){
+        else if(input.equals("su") || input.equals("support")){
 
           prompt = "Who will "+party.get(whichPlayer)+" support?";
           TextBox(28, 2, 78, 1, prompt);
@@ -302,7 +315,9 @@ public class Game{
 
             for (Adventurer target : enemies){
               if(input.equals(target.getName())){
-                party.get(whichPlayer).support(target);
+                pastestTurn = pastTurn;
+                pastTurn = currentTurn;
+                currentTurn = party.get(whichPlayer).support(target);
                 break support;
               }
             }
@@ -312,17 +327,22 @@ public class Game{
           }
 
         }
+        else if (! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
+          prompt = "Invalid command. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
+          TextBox(28, 2, 78, 1, prompt);
+          continue game;
+        }
 
         //You should decide when you want to re-ask for user input
         //If no errors:
-        drawScreen(party, enemies);
+        drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn);
         whichPlayer++;
 
 
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
-          prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+          prompt = "Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
           TextBox(28, 2, 78, 1, prompt);
 
         }else{
@@ -364,7 +384,7 @@ public class Game{
       }
 
       //display the updated screen after input has been processed.
-      drawScreen(party, enemies);
+      drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn);
 
 
     }//end of main game loop
