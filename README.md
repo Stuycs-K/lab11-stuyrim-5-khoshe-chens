@@ -21,9 +21,9 @@
 
 :white_check_mark: colorByPercent
 
-:question: drawScreen
+:white_check_mark: drawScreen
 
-:question: userInput
+:white_check_mark: userInput
 
 :white_check_mark: quit
 
