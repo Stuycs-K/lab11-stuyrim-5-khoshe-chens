@@ -283,6 +283,13 @@ public class Game{
             TextBox(28, 2, 78, 1, prompt);
           }
 
+        } else if (input.startsWith("attack ") || input.startsWith("a ")){
+          if(input.charAt(input.length()-1) < enemies.size()){
+            pastestTurn = pastTurn;
+            pastTurn = currentTurn;
+            currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.valueOf(input.charAt(input.length()-1)));
+            break attack;
+          }
         }
         else if(input.equals("special") || input.equals("sp")){
 
@@ -302,7 +309,7 @@ public class Game{
                 break specialattack;
               }
             }
-            
+
             prompt = "Please enter a valid enemy name";
             TextBox(28, 2, 78, 1, prompt);
           }
