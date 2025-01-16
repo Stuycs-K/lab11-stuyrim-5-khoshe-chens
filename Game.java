@@ -287,7 +287,7 @@ public class Game{
           if(input.charAt(input.length()-1) < enemies.size()){
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
-            currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.valueOf(input.charAt(input.length()-1)));
+            currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.valueOf(input.charAt(input.length()-1))));
             break attack;
           }
         }
