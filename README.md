@@ -3,6 +3,12 @@
 
 ## Features
 
+:ballot_box_with_check: Asking for target based on name
+
+:white_check_mark: Enemies' Turn
+
+:white_check_mark: Party's Turn
+
 :white_check_mark: drawBackground
 
 :white_check_mark: drawText
@@ -15,9 +21,9 @@
 
 :white_check_mark: colorByPercent
 
-:question: drawScreen
+:white_check_mark: drawScreen
 
-:question: userInput
+:white_check_mark: userInput
 
 :white_check_mark: quit
 
