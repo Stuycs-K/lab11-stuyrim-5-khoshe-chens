@@ -1,6 +1,7 @@
 public class Priest extends Adventurer{
   //priest special is called mana for now, is subject to change
   int mana, manaMax;
+  int baseDmg;
 
   public Priest(String name, int hp) {
     super(name, hp);
@@ -33,11 +34,22 @@ public class Priest extends Adventurer{
     mana = n;
   }
 
+  public int getDmg() {
+    return baseDmg;
+  }
+
+  public void setDmg(int newDmg) {
+    baseDmg = newDmg;
+  }
+
+
+
   //attack/support/special
 
   //Low damage (deals random dmg from 1-3 on opponent)
   public String attack(Adventurer other){
     int damage = (int) (Math.random()*3) + 1;
+    damage += baseDmg;
     other.applyDamage(damage);
     return this + " attacked " + other + " for " + damage + " damage.";
   }

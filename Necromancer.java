@@ -2,6 +2,7 @@ public class Necromancer extends Adventurer{
 
   //necromancer special is called mana for now, is subject to change
   int mana, manaMax;
+  int baseDmg;
 
   public Necromancer(String name, int hp) {
     super(name, hp);
@@ -32,6 +33,14 @@ public class Necromancer extends Adventurer{
 
   public void setSpecial(int n) {
     mana = n;
+  }
+
+  public int getDmg() {
+    return baseDmg;
+  }
+
+  public void setDmg(int newDmg) {
+    baseDmg = newDmg;
   }
 
   //attack/support/special
