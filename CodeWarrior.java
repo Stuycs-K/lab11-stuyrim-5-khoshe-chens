@@ -40,6 +40,8 @@ public class CodeWarrior extends Adventurer{
     return caffeineMax;
   }
 
+
+
   /*Deal 2-7 damage to opponent, restores 2 caffeine*/
   public String attack(Adventurer other){
     int damage = (int)(Math.random()*6)+2;

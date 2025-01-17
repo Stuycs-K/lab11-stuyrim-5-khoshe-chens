@@ -117,7 +117,7 @@ public class Game{
 
     //should we make it so that it will display the type of adventurer?
     public static void drawParty(ArrayList<Adventurer> party,int startRow){
-
+      //add display for what class
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
       //YOUR CODE HERE
       for(int i = 0; i < party.size(); i++) {
@@ -308,7 +308,7 @@ public class Game{
                 pastestTurn = pastTurn;
                 pastTurn = currentTurn;
                 //need to do special case for priest that should take in an arrayList of adventurers
-                currentTurn = party.get(whichPlayer).specialAttack(target); 
+                currentTurn = party.get(whichPlayer).specialAttack(target);
                 break specialattack;
               }
             }

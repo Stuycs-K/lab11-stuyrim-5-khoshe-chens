@@ -4,6 +4,7 @@ public abstract class Adventurer{
   private int HP,maxHP;
   private int baseDmg;
 
+
   //Abstract methods are meant to be implemented in child classes.
   /*
   all adventurers must have a custom special
@@ -96,6 +97,8 @@ public abstract class Adventurer{
   public int getDmg() {
     return baseDmg;
   }
+
+
 
   //Set Methods
   public void setHP(int health){

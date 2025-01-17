@@ -34,7 +34,6 @@ public class Priest extends Adventurer{
     faith = n;
   }
 
-  
 
 
 

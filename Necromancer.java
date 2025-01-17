@@ -35,6 +35,9 @@ public class Necromancer extends Adventurer{
   }
 
 
+
+
+
   //attack/support/special
 
   //Low percent based damage (deals random dmg from 10%-20% on opponent)
