@@ -1,3 +1,4 @@
+import java.util.*;
 public class Priest extends Adventurer{
   //priest special is called mana for now, is subject to change
   int mana, manaMax;
@@ -56,6 +57,11 @@ public class Priest extends Adventurer{
 
   //heals its own team by 3 and buffs each persons damage (including own) by 2
   public String specialAttack(ArrayList<Adventurer> other){
+    for(int i = 0; i < other.size(); i++) {
+      Adventurer current = other.get(i);
+      current.setHP(current.getHP() + 3);
+      current.setDmg(current.getDmg() + 2);
+    }
     return "";
   }
 

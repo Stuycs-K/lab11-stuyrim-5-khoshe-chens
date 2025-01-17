@@ -2,6 +2,7 @@ import java.util.Random;
 public abstract class Adventurer{
   private String name;
   private int HP,maxHP;
+  private int baseDmg;
 
   //Abstract methods are meant to be implemented in child classes.
   /*
@@ -92,6 +93,10 @@ public abstract class Adventurer{
     maxHP = newMax;
   }
 
+  public int getDmg() {
+    return baseDmg;
+  }
+
   //Set Methods
   public void setHP(int health){
     this.HP = health;
@@ -99,5 +104,9 @@ public abstract class Adventurer{
 
   public void setName(String s){
     this.name = s;
+  }
+
+  public void setDmg(int newDmg) {
+    this.baseDmg = newDmg;
   }
 }
