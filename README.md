@@ -3,6 +3,10 @@
 
 ## Features
 
+:question: Necromancer (need to finish story)
+
+:question: Priest
+
 :ballot_box_with_check: Asking for target based on name
 
 :white_check_mark: Enemies' Turn
