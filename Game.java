@@ -286,11 +286,10 @@ public class Game{
           }
 
         } else if (input.startsWith("attack ") || input.startsWith("a ")){
-          if(input.charAt(input.length()-1) < enemies.size()){
+          if(Integer.parseInt(input.charAt(input.length()-1)) < enemies.size()){
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
-            currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.valueOf(input.charAt(input.length()-1))));
-            break attack;
+            currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.parseInt(input.charAt(input.length()-1))));
           }
         }
         else if(input.equals("special") || input.equals("sp")){
@@ -308,7 +307,7 @@ public class Game{
                 pastestTurn = pastTurn;
                 pastTurn = currentTurn;
                 //need to do special case for priest that should take in an arrayList of adventurers
-                currentTurn = party.get(whichPlayer).specialAttack(target); 
+                currentTurn = party.get(whichPlayer).specialAttack(target);
                 break specialattack;
               }
             }
@@ -317,6 +316,17 @@ public class Game{
             TextBox(28, 2, 78, 1, prompt);
           }
 
+        } else if (input.startsWith("special ") || input.startsWith("sp ")){
+          if(Integer.parseInt(input.charAt(input.length()-1)) < enemies.size()){
+            pastestTurn = pastTurn;
+            pastTurn = currentTurn;
+            if (party.get(whichPlayer).getClass().equals("Priest")){
+              currentTurn = party.get(whichPlayer).sppecialAttack(party);
+            }
+            else {
+              currentTurn = party.get(whichPlayer).specialAttack(enemies.get(Integer.parseInt(input.charAt(input.length()-1))));
+            }
+          }
         }
         else if(input.equals("su") || input.equals("support")){
 
@@ -341,6 +351,12 @@ public class Game{
             TextBox(28, 2, 78, 1, prompt);
           }
 
+        } else if (input.startsWith("support ") || input.startsWith("su ")){
+          if(Integer.parseInt(input.charAt(input.length()-1)) < party.size()){
+            pastestTurn = pastTurn;
+            pastTurn = currentTurn;
+            currentTurn = party.get(whichPlayer).support(party.get(Integer.parseInt(input.charAt(input.length()-1))));
+          }
         }
         else if (! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
           prompt = "Invalid command. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
@@ -399,7 +415,12 @@ public class Game{
           pastestTurn = pastTurn;
           pastTurn = currentTurn;
           //add special attack if priest
-          currentTurn = enemies.get(whichOpponent).specialAttack(party.get(enemyTarget));
+          if (enemies.get(whichOpponent).getClass().equals("Priest")){
+            currentTurn = enemies.get(whichOpponent).specialAttack(enemies);
+          }
+          else {
+            currentTurn = enemies.get(whichOpponent).specialAttack(party.get(enemyTarget));
+          }
         }
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
