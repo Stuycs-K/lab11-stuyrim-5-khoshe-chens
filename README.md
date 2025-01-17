@@ -3,6 +3,8 @@
 
 ## Features
 
+:ballot_box_with_check: added baseDmg to all Adventurer subclasses
+
 :question: Necromancer (need to finish story)
 
 :question: Priest
