@@ -97,12 +97,12 @@ public class Game{
         return new CodeWarrior(names.remove(random.nextInt(names.size())), 25);
       }
       else if (randomInt == 1) {
-        //return new Necromancer("Tim", 15);
+        return new Necromancer(names.remove(random.nextInt(names.size())), 15);
       }
       else {
-        //return new Priest("Ben", 20);
+        return new Priest(names.remove(random.nextInt(names.size())), 20);
       }
-      return new CodeWarrior(names.remove(random.nextInt(names.size())), 25);
+      //return new CodeWarrior(names.remove(random.nextInt(names.size())), 25);
     }
 
     /*Display a List of 2-4 adventurers on the rows row through row+3 (4 rows max)
@@ -114,6 +114,8 @@ public class Game{
     *Caffeine: 20 Mana: 10   Snark: 1
     * ***THIS ROW INTENTIONALLY LEFT BLANK***
     */
+
+    //should we make it so that it will display the type of adventurer?
     public static void drawParty(ArrayList<Adventurer> party,int startRow){
 
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
@@ -209,7 +211,7 @@ public class Game{
     //Make an ArrayList of Adventurers and add 1-3 enemies to it.
     //If only 1 enemy is added it should be the boss class.
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
-    ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
+    ArrayList<Adventurer> enemies = new ArrayList<Adventurer>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     enemies.add(createRandomAdventurer(names));
     enemies.add(createRandomAdventurer(names));
@@ -305,7 +307,8 @@ public class Game{
               if(input.equals(target.getName())){
                 pastestTurn = pastTurn;
                 pastTurn = currentTurn;
-                currentTurn = party.get(whichPlayer).specialAttack(target);
+                //need to do special case for priest that should take in an arrayList of adventurers
+                currentTurn = party.get(whichPlayer).specialAttack(target); 
                 break specialattack;
               }
             }
@@ -395,6 +398,7 @@ public class Game{
 
           pastestTurn = pastTurn;
           pastTurn = currentTurn;
+          //add special attack if priest
           currentTurn = enemies.get(whichOpponent).specialAttack(party.get(enemyTarget));
         }
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -402,6 +406,7 @@ public class Game{
 
         //Decide where to draw the following prompt:
         prompt = "Press enter to see next turn";
+        //needs to print in textbox on the right
         TextBox(28, 2, 78, 1, prompt);
 
         whichOpponent++;
