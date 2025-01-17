@@ -286,10 +286,10 @@ public class Game{
           }
 
         } else if (input.startsWith("attack ") || input.startsWith("a ")){
-          if(Integer.parseInt(input.charAt(input.length()-1)) < enemies.size()){
+          if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
-            currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.parseInt(input.charAt(input.length()-1))));
+            currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
           }
         }
         else if(input.equals("special") || input.equals("sp")){
@@ -317,14 +317,14 @@ public class Game{
           }
 
         } else if (input.startsWith("special ") || input.startsWith("sp ")){
-          if(Integer.parseInt(input.charAt(input.length()-1)) < enemies.size()){
+          if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
             if (party.get(whichPlayer).getClass().equals("Priest")){
-              currentTurn = party.get(whichPlayer).sppecialAttack(party);
+              currentTurn = party.get(whichPlayer).specialAttack(party);
             }
             else {
-              currentTurn = party.get(whichPlayer).specialAttack(enemies.get(Integer.parseInt(input.charAt(input.length()-1))));
+              currentTurn = party.get(whichPlayer).specialAttack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
             }
           }
         }
@@ -352,10 +352,10 @@ public class Game{
           }
 
         } else if (input.startsWith("support ") || input.startsWith("su ")){
-          if(Integer.parseInt(input.charAt(input.length()-1)) < party.size()){
+          if(Integer.parseInt(input.substring(input.length()-1)) < party.size()){
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
-            currentTurn = party.get(whichPlayer).support(party.get(Integer.parseInt(input.charAt(input.length()-1))));
+            currentTurn = party.get(whichPlayer).support(party.get(Integer.parseInt(input.substring(input.length()-1))));
           }
         }
         else if (! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
