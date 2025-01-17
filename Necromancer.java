@@ -47,7 +47,8 @@ public class Necromancer extends Adventurer{
 
   //Low percent based damage (deals random dmg from 10%-20% on opponent)
   public String attack(Adventurer other){
-    float damage =  other.getHP() * ((int) (Math.random()*baseDmg) + 1) * 0.01 + 0.1;
+    double damage =  other.getHP() * ((int) (Math.random()*2) + 1) * 0.05 + 0.1;
+    damage += baseDmg;
     other.applyDamage(damage);
     return this + " attacked " + other + " for " + damage + " damage.";
     return "";
@@ -58,7 +59,7 @@ public class Necromancer extends Adventurer{
     if(this == other) {
       return this.support();
     }
-    setHP(getHP() + 5);
+    setHP((int) (getHP() * 0.3));
     return "Cast a spell to heal " + other + " by 5 hp.";
   }
 
