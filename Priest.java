@@ -1,12 +1,12 @@
 import java.util.*;
 public class Priest extends Adventurer{
   //priest special is called mana for now, is subject to change
-  int mana, manaMax;
+  int faith, faithMax;
 
   public Priest(String name, int hp) {
     super(name, hp);
-    manaMax = 20;
-    mana = manaMax/2;
+    faithMax = 20;
+    faith = faithMax/2;
   }
 
   public Priest(String name) {
@@ -19,19 +19,19 @@ public class Priest extends Adventurer{
   //add overloaded contructors if necessary
 
   public String getSpecialName() {
-    return "mana";
+    return "Faith";
   }
 
   public int getSpecial() {
-    return mana;
+    return faith;
   }
 
   public int getSpecialMax() {
-    return manaMax;
+    return faithMax;
   }
 
   public void setSpecial(int n) {
-    mana = n;
+    faith = n;
   }
 
   

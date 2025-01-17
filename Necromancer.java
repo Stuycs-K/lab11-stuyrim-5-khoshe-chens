@@ -1,12 +1,12 @@
 public class Necromancer extends Adventurer{
 
   //necromancer special is called mana for now, is subject to change
-  int mana, manaMax;
+  int souls, soulsMax;
 
   public Necromancer(String name, int hp) {
     super(name, hp);
-    manaMax = 20;
-    mana = manaMax/2;
+    soulsMax = 20;
+    souls = soulsMax/2;
   }
 
   public Necromancer(String name) {
@@ -19,19 +19,19 @@ public class Necromancer extends Adventurer{
   //add overloaded contructors if necessary
 
   public String getSpecialName() {
-    return "mana";
+    return "Souls";
   }
 
   public int getSpecial() {
-    return mana;
+    return souls;
   }
 
   public int getSpecialMax() {
-    return manaMax;
+    return soulsMax;
   }
 
   public void setSpecial(int n) {
-    mana = n;
+    souls = n;
   }
 
 
@@ -39,7 +39,8 @@ public class Necromancer extends Adventurer{
 
   //Low percent based damage (deals random dmg from 10%-20% on opponent)
   public String attack(Adventurer other){
-    double damage =  other.getHP() * ((int) (Math.random()*2) + 1) * 0.05 + 0.1;
+    double percent = ((int) (Math.random()*2) + 1) * 0.05 + 0.1;
+    double damage =  other.getHP() * percent;
     damage += other.getDmg();
     other.applyDamage((int) damage);
     return this + " attacked " + other + " for " + damage + " damage.";
