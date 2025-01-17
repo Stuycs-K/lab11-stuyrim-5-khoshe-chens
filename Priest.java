@@ -2,7 +2,6 @@ import java.util.*;
 public class Priest extends Adventurer{
   //priest special is called mana for now, is subject to change
   int mana, manaMax;
-  int baseDmg;
 
   public Priest(String name, int hp) {
     super(name, hp);
@@ -35,13 +34,7 @@ public class Priest extends Adventurer{
     mana = n;
   }
 
-  public int getDmg() {
-    return baseDmg;
-  }
-
-  public void setDmg(int newDmg) {
-    baseDmg = newDmg;
-  }
+  
 
 
 
@@ -50,7 +43,7 @@ public class Priest extends Adventurer{
   //Low damage (deals random dmg from 1-3 on opponent)
   public String attack(Adventurer other){
     int damage = (int) (Math.random()*3) + 1;
-    damage += baseDmg;
+    damage += other.getDmg();
     other.applyDamage(damage);
     return this + " attacked " + other + " for " + damage + " damage.";
   }
@@ -62,7 +55,11 @@ public class Priest extends Adventurer{
       current.setHP(current.getHP() + 3);
       current.setDmg(current.getDmg() + 2);
     }
-    return "";
+    return this + " healed their whole team for 3HP and buffed everyone's damage by 2";
+  }
+
+  public String specialAttack(Adventurer other) {
+    return "doesn't do anything";
   }
 
   //heals target by 5 hp (doesnt restore special)
