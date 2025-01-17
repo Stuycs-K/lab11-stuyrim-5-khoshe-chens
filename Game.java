@@ -320,8 +320,8 @@ public class Game{
           if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
-            if (party.get(whichPlayer).getClass().equals("Priest")){
-              currentTurn = party.get(whichPlayer).specialAttack(party);
+            if (party.get(whichPlayer).getClass() == Priest.class){
+              currentTurn = ((Priest) party.get(whichPlayer)).specialAttack(party);
             }
             else {
               currentTurn = party.get(whichPlayer).specialAttack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
@@ -415,8 +415,8 @@ public class Game{
           pastestTurn = pastTurn;
           pastTurn = currentTurn;
           //add special attack if priest
-          if (enemies.get(whichOpponent).getClass().equals("Priest")){
-            currentTurn = enemies.get(whichOpponent).specialAttack(enemies);
+          if (enemies.get(whichOpponent).getClass() == Priest.class){
+            currentTurn = ((Priest) enemies.get(whichOpponent)).specialAttack(enemies);
           }
           else {
             currentTurn = enemies.get(whichOpponent).specialAttack(party.get(enemyTarget));
