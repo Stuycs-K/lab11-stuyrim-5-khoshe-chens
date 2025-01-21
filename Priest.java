@@ -4,8 +4,8 @@ public class Priest extends Adventurer{
 
   public Priest(String name, int hp) {
     super(name, hp);
-    faithMax = 20;
-    faith = faithMax/2;
+    faithMax = 15;
+    faith = 7;
   }
 
   public Priest(String name) {
@@ -52,13 +52,20 @@ public class Priest extends Adventurer{
 
   //heals its own team by 3 and buffs each persons damage (including own) by 2
   public String specialAttack(ArrayList<Adventurer> other){
-    for(int i = 0; i < other.size(); i++) {
-      Adventurer current = other.get(i);
-      current.setHP(current.getHP() + 3);
-      current.setDmg(current.getDmg() + 2);
+    if(getSpecial() >= 9) {
+      setSpecial(getSpecial()-9);
+      for(int i = 0; i < other.size(); i++) {
+        Adventurer current = other.get(i);
+        current.setHP(current.getHP() + 3);
+        current.setDmg(current.getDmg() + 2);
+      }
+      return this + " blessed their own team with Divine Grace and healed everyone for 3 hp and buffed everyone's damage by 2.";
+    } else {
+      return this + "did not have enough faith to use Divine Grace. Instead "+ support(other.get(1));
     }
-    return this + " blessed their own team with Diving Grace and healed everyone for 3 hp and buffed everyone's damage by 2.";
+    
   }
+    
 
   public String specialAttack(Adventurer other) {
     return "doesn't do anything";
@@ -70,12 +77,12 @@ public class Priest extends Adventurer{
       return this.support();
     }
     setHP(getHP() + 5);
-    return this + "casted a healing spell to rejuvenate " + other + " by 5 hp.";
+    return this + " casted a healing spell to rejuvenate " + other + " by 5 hp.";
   }
 
   public String support(){
     setHP(getHP() + 5);
-    return this + "casted a spell and healed themselves for 5 hp.";
+    return this + " casted a spell and healed themselves for 5 hp.";
   }
 
 

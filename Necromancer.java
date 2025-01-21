@@ -5,8 +5,8 @@ public class Necromancer extends Adventurer{
 
   public Necromancer(String name, int hp) {
     super(name, hp);
-    soulsMax = 20;
-    souls = soulsMax/2;
+    soulsMax = 15;
+    souls = 8;
   }
 
   public Necromancer(String name) {
@@ -55,11 +55,22 @@ public class Necromancer extends Adventurer{
 
   //set targets health to 0.3 of what it originally was (rounds to integer if there is decimal)
   public String specialAttack(Adventurer other){
-    if(this == other) {
-      return this.support();
+    if(getSpecial() >= 9){
+      setSpecial(getSpecial()-9);
+      int damage = 0;
+      setHP((int) (getHP() * 0.3));
+      damage += other.getDmg();
+      if (other.getHP() - damage < 0) {
+        other.setHP(0);
+      } else {
+        other.applyDamage(damage);
+      }
+      return this + " cursed " + other + " with Death's Touch and set their hp to 0.3 of what it originally was.";
+    }else{
+      return this + " did not have enough souls to perform Death's Touch. Instead "+attack(other);
     }
-    setHP((int) (getHP() * 0.3));
-    return this + " cursed " + other + " with Death's Touch and set their hp to 0.3 of what it originally was.";
+
+    
   }
 
   //buffs damage of target by 3 hp (doesnt restore special)
@@ -73,7 +84,7 @@ public class Necromancer extends Adventurer{
 
   public String support(){
     this.setDmg(this.getDmg() + 3);
-    return this + "summoned skeletons to defend themselves and buffed their own damage by 3.";
+    return this + " summoned skeletons to defend themselves and buffed their own damage by 3.";
   }
 
 }
