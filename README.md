@@ -25,7 +25,7 @@
 
 :white_check_mark: Priest attack/support/special
 
-:question: Boss attack/support/special
+:white_check_mark: Boss attack/support/special
 
 :white_check_mark: Displaying player attacks in left box and enemy attacks on right box
 
@@ -41,7 +41,7 @@
 
 :white_check_mark: HP never goes below 0
 
-:question: HP never goes above maxHP (required)
+:white_check_mark: HP never goes above maxHP (required)
 
 :question: run (missing special case for priest special attack when player's turn) (required)
 

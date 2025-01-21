@@ -56,7 +56,11 @@ public class Priest extends Adventurer{
       setSpecial(getSpecial()-9);
       for(int i = 0; i < other.size(); i++) {
         Adventurer current = other.get(i);
-        current.setHP(current.getHP() + 3);
+        if(current.getHP() + 3 > current.getmaxHP()) {
+          current.setHP(current.getmaxHP());
+        } else {
+          current.setHP(current.getHP() + 3);
+        }
         current.setDmg(current.getDmg() + 2);
       }
       return this + " blessed their own team with Divine Grace and healed everyone for 3 hp and buffed everyone's damage by 2.";
@@ -76,12 +80,20 @@ public class Priest extends Adventurer{
     if(this == other) {
       return this.support();
     }
-    setHP(getHP() + 5);
+    if(other.getHP() + 5 > other.getmaxHP()) {
+      other.setHP(other.getmaxHP());
+    } else {
+      other.setHP(other.getHP() + 5);
+    }
     return this + " casted a healing spell to rejuvenate " + other + " by 5 hp.";
   }
 
   public String support(){
-    setHP(getHP() + 5);
+    if(getHP() + 5 > getmaxHP()) {
+      setHP(getmaxHP());
+    } else {
+      setHP(getHP() + 5);
+    }
     return this + " casted a spell and healed themselves for 5 hp.";
   }
 
