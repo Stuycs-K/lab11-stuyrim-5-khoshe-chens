@@ -122,11 +122,11 @@ public class Game{
       //YOUR CODE HERE
       for(int i = 0; i < party.size(); i++) {
         Adventurer current = party.get(i);
-        drawText(current.getName(), startRow, 26 * i + 3);
-        drawText(current.getClass().getName(), startRow + 1, 26 * i + 3);
-        drawText("HP: " + colorByPercent(current.getHP(), current.getmaxHP()) + " ", startRow + 2, 26 * i + 3);
-        String special = current.getSpecialName() + ": " + current.getSpecial();
-        drawText(special, startRow + 3, 26 * i + 3);
+        TextBox(startRow, 26 * i + 3, 24, 1, current.getName());
+        TextBox(startRow + 1, 26 * i + 3, 24, 1, current.getClass().getName());
+        TextBox(startRow + 2, 26 * i + 3, 24, 1, "HP: " + colorByPercent(current.getHP(), current.getmaxHP()) + " ");
+        String special = current.getSpecialName() + ": " + current.getSpecial() + "/10";
+        TextBox(startRow + 3, 26 * i + 3, 24, 1, special);
 
       }
 
