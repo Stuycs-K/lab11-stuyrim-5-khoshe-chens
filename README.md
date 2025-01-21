@@ -13,6 +13,8 @@
 
 :ballot_box_with_check: Asking for target based on name
 
+:ballot_box_with_check: adventurer names are randomly chosen from a list with no repeats
+
 :ballot_box_with_check: added baseDmg to all Adventurer subclasses so an Adventurer's damage can be buffed
 
 :white_check_mark: Necromancer attack/support/special
@@ -35,11 +37,10 @@
 
 :question: HP never goes above maxHP
 
-:ballot_box_with_check: adventurer names are randomly chosen from a list with no repeats
-
 :question: run (missing special case for priest special attack when player's turn)
 
 
+pls delete this part when the checklist is completely updated
 :white_check_mark: This feature works.
 
 :question: This feature works partially.
@@ -53,7 +54,9 @@
 
 ## Adventurer Subclasses
 
-|Adventurer Subclasses|Max HP    |Attack            |Support    |Special                                             |
-|:-------------------:|:--------:|:----------------:|:---------:|:--------------------------------------------------:|
-|Necromancer          |Max HP: 15|Low % based damage|Buff damage|Set target's health to 1 or Very high % based damage|
-|Priest               |Max HP: 20|Low damage        |Heal target|Heal entire team and buff damage                    |
+|**Adventurer Subclasses**|**Necromancer**|**Priest**|**blank(Boss)**|
+| --- | --- | --- | --- |
+|**Max HP**| 15 | 20 | 40 |
+|**Attack**| Staff drain: deals damage worth 10~20% of target's health|Holy Light: deals 1~3 damage to target | not set yet |
+|**Support**| Summons skeletons: buffs target's damage by 3| Healing spell: heals target by 5 hp| tbd|
+|**Special**| Death's Touch: sets target's health to 0.3 of what it originally was| Divine Grace: heals their own team by 3 hp and buffs everyone's damage by 2| tbd|
