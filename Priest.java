@@ -1,6 +1,5 @@
 import java.util.*;
 public class Priest extends Adventurer{
-  //priest special is called mana for now, is subject to change
   int faith, faithMax;
 
   public Priest(String name, int hp) {
@@ -19,7 +18,7 @@ public class Priest extends Adventurer{
   //add overloaded contructors if necessary
 
   public String getSpecialName() {
-    return "Faith";
+    return "faith";
   }
 
   public int getSpecial() {
@@ -48,7 +47,7 @@ public class Priest extends Adventurer{
     } else {
       other.applyDamage(damage);
     }
-    return this + " attacked " + other + " for " + damage + " damage.";
+    return this + " struck " + other + " with Holy Light, dealing " + damage + " damage to them.";
   }
 
   //heals its own team by 3 and buffs each persons damage (including own) by 2
@@ -58,7 +57,7 @@ public class Priest extends Adventurer{
       current.setHP(current.getHP() + 3);
       current.setDmg(current.getDmg() + 2);
     }
-    return this + " healed their whole team for 3HP and buffed everyone's damage by 2";
+    return this + " blessed their own team with Diving Grace and healed everyone for 3 hp and buffed everyone's damage by 2.";
   }
 
   public String specialAttack(Adventurer other) {
@@ -71,12 +70,12 @@ public class Priest extends Adventurer{
       return this.support();
     }
     setHP(getHP() + 5);
-    return "Cast a spell to heal " + other + " by 5 hp.";
+    return this + "casted a healing spell to rejuvenate " + other + " by 5 hp.";
   }
 
   public String support(){
     setHP(getHP() + 5);
-    return "Healed themselves for 5 HP";
+    return this + "casted a spell and healed themselves for 5 hp.";
   }
 
 

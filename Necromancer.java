@@ -19,7 +19,7 @@ public class Necromancer extends Adventurer{
   //add overloaded contructors if necessary
 
   public String getSpecialName() {
-    return "Souls";
+    return "souls";
   }
 
   public int getSpecial() {
@@ -50,7 +50,7 @@ public class Necromancer extends Adventurer{
     } else {
       other.applyDamage((int) damage);
     }
-    return this + " attacked " + other + " for " + damage + " damage.";
+    return this + " drained " + other + "'s health using its staff and dealt " + (int) damage + " damage.";
   }
 
   //set targets health to 0.3 of what it originally was (rounds to integer if there is decimal)
@@ -59,7 +59,7 @@ public class Necromancer extends Adventurer{
       return this.support();
     }
     setHP((int) (getHP() * 0.3));
-    return "Cast a spell to heal " + other + " by 5 hp.";
+    return this + " cursed " + other + " with Death's Touch and set their hp to 0.3 of what it originally was.";
   }
 
   //buffs damage of target by 3 hp (doesnt restore special)
@@ -68,12 +68,12 @@ public class Necromancer extends Adventurer{
       return this.support();
     }
     other.setDmg(other.getDmg() + 3);
-    return "Buffed " + other + " damage by 3.";
+    return this + " summoned skeletons to help " + other + " in battle and buffed their damage by 3.";
   }
 
   public String support(){
     this.setDmg(this.getDmg() + 3);
-    return "Buffed their own damage by 3.";
+    return this + "summoned skeletons to defend themselves and buffed their own damage by 3.";
   }
 
 }

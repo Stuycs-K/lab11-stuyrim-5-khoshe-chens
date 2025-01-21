@@ -394,7 +394,7 @@ public class Game{
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
-          prompt = "Press enter to see monster's turn";
+          prompt = "Press enter to see enemy's turn";
           TextBox(28, 2, 78, 1, prompt);
 
           partyTurn = false;
@@ -441,8 +441,7 @@ public class Game{
 
 
         //Decide where to draw the following prompt:
-        prompt = "Press enter to see next turn";
-        //needs to print in textbox on the right
+        prompt = "Press enter to see enemy's next turn";
         TextBox(28, 2, 78, 1, prompt);
 
         whichOpponent++;
