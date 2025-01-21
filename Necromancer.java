@@ -45,7 +45,11 @@ public class Necromancer extends Adventurer{
     double percent = ((int) (Math.random()*2) + 1) * 0.05 + 0.1;
     double damage =  other.getHP() * percent;
     damage += other.getDmg();
-    other.applyDamage((int) damage);
+    if (other.getHP() - damage < 0) {
+      other.setHP(0);
+    } else {
+      other.applyDamage((int) damage);
+    }
     return this + " attacked " + other + " for " + damage + " damage.";
   }
 

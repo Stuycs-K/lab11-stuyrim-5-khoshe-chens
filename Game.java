@@ -234,9 +234,9 @@ public class Game{
     //Make an ArrayList of Adventurers and add 2-4 Adventurers to it.
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    party.add(createRandomAdventurer(names));
-    party.add(createRandomAdventurer(names));
-    party.add(createRandomAdventurer(names));
+    party.add(new CodeWarrior(names.get(0)));
+    party.add(new Necromancer(names.get(1)));
+    party.add(new Priest(names.get(2)));
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     boolean partyTurn = true;

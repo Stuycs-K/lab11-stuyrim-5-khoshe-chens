@@ -43,7 +43,11 @@ public class Priest extends Adventurer{
   public String attack(Adventurer other){
     int damage = (int) (Math.random()*3) + 1;
     damage += other.getDmg();
-    other.applyDamage(damage);
+    if (other.getHP() - damage < 0) {
+      other.setHP(0);
+    } else {
+      other.applyDamage(damage);
+    }
     return this + " attacked " + other + " for " + damage + " damage.";
   }
 
