@@ -82,7 +82,7 @@ public class CodeWarrior extends Adventurer{
     if (this == other){
       return this.support();
     }
-    return "Gives a coffee to "+other+" and restores "
+    return this + " gives a coffee to "+other+" and restores "
     + other.restoreSpecial(5)+" "+other.getSpecialName();
   }
   /*Restores 6 special and 1 hp to self.*/

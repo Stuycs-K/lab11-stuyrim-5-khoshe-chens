@@ -65,7 +65,7 @@ public class Priest extends Adventurer{
       }
       return this + " blessed their own team with Divine Grace and healed everyone for 3 hp and buffed everyone's damage by 2.";
     } else {
-      return this + "did not have enough faith to use Divine Grace. Instead "+ support(other.get(1));
+      return this + " did not have enough faith to use Divine Grace. Instead "+ support(other.get(1));
     }
     
   }

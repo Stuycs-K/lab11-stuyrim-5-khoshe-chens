@@ -235,6 +235,7 @@ public class Game{
 
       if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){
         quit();
+        return;
       }
       if (input.equals("1")){
         enemies.add(new Boss());
@@ -310,7 +311,7 @@ public class Game{
           }
         }
         if (!partyAlive){
-          quit();
+          break game;
         }
 
         enemiesAlive = false;
@@ -320,7 +321,7 @@ public class Game{
           }
         }
         if (!enemiesAlive){
-          quit();
+          break game;
         }
 
         //Process user input for the last Adventurer:
@@ -348,18 +349,25 @@ public class Game{
           }
 
         } else if (input.startsWith("attack ") || input.startsWith("a ")){
-          if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
-            if (enemies.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
-              prompt = "Please enter a valid enemy number. Enter command for "+party.get(whichPlayer);
+          try {
+            if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
+              if (enemies.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
+                prompt = "Please enter a valid enemy number. Enter command for "+party.get(whichPlayer);
+                TextBox(28, 2, 78, 1, prompt);
+                continue game;
+              }
+              pastestTurn = pastTurn;
+              pastTurn = currentTurn;
+              currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
+            }
+            else{
+              prompt = "Invalid number. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
               TextBox(28, 2, 78, 1, prompt);
               continue game;
-            }
-            pastestTurn = pastTurn;
-            pastTurn = currentTurn;
-            currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
+              }
           }
-          else{
-            prompt = "Invalid number. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
+          catch (Exception ex){
+            prompt = "Invalid command. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
             TextBox(28, 2, 78, 1, prompt);
             continue game;
           }
@@ -396,23 +404,30 @@ public class Game{
           }
 
         } else if (input.startsWith("special ") || input.startsWith("sp ")){
-          if (party.get(whichPlayer).getClass() == Priest.class){
-            pastestTurn = pastTurn;
-            pastTurn = currentTurn;
-            currentTurn = ((Priest) party.get(whichPlayer)).specialAttack(party);
-          }
-          else if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
-            if (enemies.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
-              prompt = "Please enter a valid enemy number. Enter command for "+party.get(whichPlayer);
+          try {
+            if (party.get(whichPlayer).getClass() == Priest.class){
+              pastestTurn = pastTurn;
+              pastTurn = currentTurn;
+              currentTurn = ((Priest) party.get(whichPlayer)).specialAttack(party);
+            }
+            else if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
+              if (enemies.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
+                prompt = "Please enter a valid enemy number. Enter command for "+party.get(whichPlayer);
+                TextBox(28, 2, 78, 1, prompt);
+                continue game;
+              }
+              pastestTurn = pastTurn;
+              pastTurn = currentTurn;
+              currentTurn = party.get(whichPlayer).specialAttack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
+            }
+            else{
+              prompt = "Invalid number. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
               TextBox(28, 2, 78, 1, prompt);
               continue game;
             }
-            pastestTurn = pastTurn;
-            pastTurn = currentTurn;
-            currentTurn = party.get(whichPlayer).specialAttack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
           }
-          else{
-            prompt = "Invalid number. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
+          catch (Exception ex){
+            prompt = "Invalid command. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
             TextBox(28, 2, 78, 1, prompt);
             continue game;
           }
@@ -441,18 +456,25 @@ public class Game{
           }
 
         } else if (input.startsWith("support ") || input.startsWith("su ")){
-          if(Integer.parseInt(input.substring(input.length()-1)) < party.size()){
-            if (party.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
-              prompt = "Please enter a valid ally number. Enter command for "+party.get(whichPlayer);
+          try {
+            if(Integer.parseInt(input.substring(input.length()-1)) < party.size()){
+              if (party.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
+                prompt = "Please enter a valid ally number. Enter command for "+party.get(whichPlayer);
+                TextBox(28, 2, 78, 1, prompt);
+                continue game;
+              }
+              pastestTurn = pastTurn;
+              pastTurn = currentTurn;
+              currentTurn = party.get(whichPlayer).support(party.get(Integer.parseInt(input.substring(input.length()-1))));
+            }
+            else{
+              prompt = "Invalid number. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
               TextBox(28, 2, 78, 1, prompt);
               continue game;
             }
-            pastestTurn = pastTurn;
-            pastTurn = currentTurn;
-            currentTurn = party.get(whichPlayer).support(party.get(Integer.parseInt(input.substring(input.length()-1))));
           }
-          else{
-            prompt = "Invalid number. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
+          catch (Exception ex){
+            prompt = "Invalid command. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
             TextBox(28, 2, 78, 1, prompt);
             continue game;
           }
@@ -472,11 +494,8 @@ public class Game{
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
-          while (party.get(whichPlayer).isDead()){
+          while (whichPlayer < party.size() && party.get(whichPlayer).isDead()){
             whichPlayer++;
-            if (whichPlayer >= party.size()){
-              quit();
-            }
           }
           prompt = "Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
           TextBox(28, 2, 78, 1, prompt);
@@ -487,11 +506,8 @@ public class Game{
           partyTurn = false;
           whichOpponent = 0;
 
-          while (party.get(whichOpponent).isDead()){
+          while (whichOpponent < enemies.size() && party.get(whichOpponent).isDead()){
             whichOpponent++;
-            if (whichOpponent >= enemies.size()){
-              quit();
-            }
           }
           prompt = "Press enter to see enemy's turn";
           TextBox(28, 2, 78, 1, prompt);
@@ -507,59 +523,63 @@ public class Game{
           }
         }
         if (!partyAlive){
-          quit();
+          break game;
         }
 
         enemiesAlive = false;
-        for (Adventurer adv : party){
+        for (Adventurer adv : enemies){
           if (!adv.isDead()){
             enemiesAlive = true;
           }
         }
         if (!enemiesAlive){
-          quit();
+          break game;
         }
 
         //enemy attacks a randomly chosen person with a randomly chosen attack.z`
         //Enemy action choices go here!
         /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-        enemyMove = rand.nextInt(3);
+        if (!enemies.get(whichOpponent).isDead()){
 
-        if (enemyMove == 0){
-          enemyTarget = rand.nextInt(party.size());
-          while (party.get(enemyTarget).isDead()){
+          enemyMove = rand.nextInt(3);
+
+          if (enemyMove == 0){
             enemyTarget = rand.nextInt(party.size());
-          }
+            while (party.get(enemyTarget).isDead()){
+              enemyTarget = rand.nextInt(party.size());
+            }
 
-          enemyPastestTurn = enemyPastTurn;
-          enemyPastTurn = enemyCurrentTurn;
-          enemyCurrentTurn = enemies.get(whichOpponent).attack(party.get(enemyTarget));
-        }
-        else if (enemyMove == 1){
-          enemyTarget = rand.nextInt(enemies.size());
-          while (enemies.get(enemyTarget).isDead()){
+            enemyPastestTurn = enemyPastTurn;
+            enemyPastTurn = enemyCurrentTurn;
+            enemyCurrentTurn = enemies.get(whichOpponent).attack(party.get(enemyTarget));
+            }
+          else if (enemyMove == 1){
             enemyTarget = rand.nextInt(enemies.size());
-          }
+            while (enemies.get(enemyTarget).isDead()){
+              enemyTarget = rand.nextInt(enemies.size());
+            }
 
-          enemyPastestTurn = enemyPastTurn;
-          enemyPastTurn = enemyCurrentTurn;
-          enemyCurrentTurn = enemies.get(whichOpponent).support(enemies.get(enemyTarget));
-        }
-        else {
-          enemyTarget = rand.nextInt(party.size());
-          while (party.get(enemyTarget).isDead()){
-            enemyTarget = rand.nextInt(party.size());
-          }
-
-          enemyPastestTurn = enemyPastTurn;
-          enemyPastTurn = enemyCurrentTurn;
-          //add special attack if priest
-          if (enemies.get(whichOpponent).getClass() == Priest.class){
-            enemyCurrentTurn = ((Priest) enemies.get(whichOpponent)).specialAttack(enemies);
+            enemyPastestTurn = enemyPastTurn;
+            enemyPastTurn = enemyCurrentTurn;
+            enemyCurrentTurn = enemies.get(whichOpponent).support(enemies.get(enemyTarget));
           }
           else {
-            enemyCurrentTurn = enemies.get(whichOpponent).specialAttack(party.get(enemyTarget));
+            enemyTarget = rand.nextInt(party.size());
+            while (party.get(enemyTarget).isDead()){
+              enemyTarget = rand.nextInt(party.size());
+            }
+
+            enemyPastestTurn = enemyPastTurn;
+            enemyPastTurn = enemyCurrentTurn;
+            //add special attack if priest
+            if (enemies.get(whichOpponent).getClass() == Priest.class){
+              enemyCurrentTurn = ((Priest) enemies.get(whichOpponent)).specialAttack(enemies);
+            }
+            else {
+              enemyCurrentTurn = enemies.get(whichOpponent).specialAttack(party.get(enemyTarget));
+            }
           }
+
         }
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
@@ -568,11 +588,8 @@ public class Game{
         
         whichOpponent++;
 
-        while (party.get(whichOpponent).isDead()){
+        while (whichOpponent < enemies.size() && party.get(whichOpponent).isDead()){
           whichOpponent++;
-          if (whichOpponent >= enemies.size()){
-            quit();
-          }
         }
         prompt = "Press enter to see enemy's next turn";
         TextBox(28, 2, 78, 1, prompt);
@@ -587,11 +604,8 @@ public class Game{
         turn++;
         partyTurn=true;
         //display this prompt before player's turn
-        while (party.get(whichPlayer).isDead()){
+        while (whichPlayer < party.size() && party.get(whichPlayer).isDead()){
           whichPlayer++;
-          if (whichPlayer >= party.size()){
-            quit();
-          }
         }
         prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
         TextBox(28, 2, 78, 1, prompt);
