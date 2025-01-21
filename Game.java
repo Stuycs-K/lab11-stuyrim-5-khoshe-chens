@@ -288,7 +288,7 @@ public class Game{
             if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){ break game; }
 
             for (Adventurer target : enemies){
-              if(input.equals(target.getName())){
+              if(input.equals(target.getName()) && !target.isDead()){
                 pastestTurn = pastTurn;
                 pastTurn = currentTurn;
                 currentTurn = party.get(whichPlayer).attack(target);
@@ -302,6 +302,11 @@ public class Game{
 
         } else if (input.startsWith("attack ") || input.startsWith("a ")){
           if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
+            if (enemies.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
+              prompt = "Please enter a valid enemy name";
+              TextBox(28, 2, 78, 1, prompt);
+              continue game;
+            }
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
             currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
@@ -309,30 +314,42 @@ public class Game{
         }
         else if(input.equals("special") || input.equals("sp")){
 
-          prompt = "Who will "+party.get(whichPlayer)+" special attack?";
-          TextBox(28, 2, 78, 1, prompt);
-
-          specialattack:
-          while (true){
-            input = userInput(in);
-            if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){ break game; }
-
-            for (Adventurer target : enemies){
-              if(input.equals(target.getName())){
-                pastestTurn = pastTurn;
-                pastTurn = currentTurn;
-                //need to do special case for priest that should take in an arrayList of adventurers
-                currentTurn = party.get(whichPlayer).specialAttack(target);
-                break specialattack;
-              }
-            }
-
-            prompt = "Please enter a valid enemy name";
+          if (party.get(whichPlayer).getClass() == Priest.class){
+            pastestTurn = pastTurn;
+            pastTurn = currentTurn;
+            currentTurn = ((Priest) party.get(whichPlayer)).specialAttack(party);
+          }
+          else{
+            prompt = "Who will "+party.get(whichPlayer)+" special attack?";
             TextBox(28, 2, 78, 1, prompt);
+
+            specialattack:
+            while (true){
+              input = userInput(in);
+              if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){ break game; }
+
+              for (Adventurer target : enemies){
+                if(input.equals(target.getName()) && !target.isDead()){
+                  pastestTurn = pastTurn;
+                  pastTurn = currentTurn;
+                  //need to do special case for priest that should take in an arrayList of adventurers
+                  currentTurn = party.get(whichPlayer).specialAttack(target);
+                  break specialattack;
+                }
+              }
+
+              prompt = "Please enter a valid enemy name";
+              TextBox(28, 2, 78, 1, prompt);
+            }
           }
 
         } else if (input.startsWith("special ") || input.startsWith("sp ")){
           if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
+            if (!(party.get(whichPlayer).getClass() == Priest.class) && enemies.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
+              prompt = "Please enter a valid enemy name";
+              TextBox(28, 2, 78, 1, prompt);
+              continue game;
+            }
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
             if (party.get(whichPlayer).getClass() == Priest.class){
@@ -354,7 +371,7 @@ public class Game{
             if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){ break game; }
 
             for (Adventurer target : party){
-              if(input.equals(target.getName())){
+              if(input.equals(target.getName()) && !target.isDead()){
                 pastestTurn = pastTurn;
                 pastTurn = currentTurn;
                 currentTurn = party.get(whichPlayer).support(target);
@@ -368,6 +385,11 @@ public class Game{
 
         } else if (input.startsWith("support ") || input.startsWith("su ")){
           if(Integer.parseInt(input.substring(input.length()-1)) < party.size()){
+            if (party.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
+              prompt = "Please enter a valid ally name";
+              TextBox(28, 2, 78, 1, prompt);
+              continue game;
+            }
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
             currentTurn = party.get(whichPlayer).support(party.get(Integer.parseInt(input.substring(input.length()-1))));
@@ -388,17 +410,29 @@ public class Game{
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
+          while (party.get(whichPlayer).isDead()){
+            whichPlayer++;
+            if (whichPlayer >= party.size()){
+              quit();
+            }
+          }
           prompt = "Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
           TextBox(28, 2, 78, 1, prompt);
 
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
-          prompt = "Press enter to see enemy's turn";
-          TextBox(28, 2, 78, 1, prompt);
-
           partyTurn = false;
           whichOpponent = 0;
+
+          while (party.get(whichOpponent).isDead()){
+            whichOpponent++;
+            if (whichOpponent >= enemies.size()){
+              quit();
+            }
+          }
+          prompt = "Press enter to see enemy's turn";
+          TextBox(28, 2, 78, 1, prompt);
         }
         //done with one party member
       }else{
@@ -441,10 +475,17 @@ public class Game{
 
 
         //Decide where to draw the following prompt:
+        
+        whichOpponent++;
+
+        while (party.get(whichOpponent).isDead()){
+          whichOpponent++;
+          if (whichOpponent >= enemies.size()){
+            quit();
+          }
+        }
         prompt = "Press enter to see enemy's next turn";
         TextBox(28, 2, 78, 1, prompt);
-
-        whichOpponent++;
 
       }//end of one enemy.
 
@@ -456,6 +497,12 @@ public class Game{
         turn++;
         partyTurn=true;
         //display this prompt before player's turn
+        while (party.get(whichPlayer).isDead()){
+          whichPlayer++;
+          if (whichPlayer >= party.size()){
+            quit();
+          }
+        }
         prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
         TextBox(28, 2, 78, 1, prompt);
       }
