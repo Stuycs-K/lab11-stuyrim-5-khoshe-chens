@@ -215,6 +215,8 @@ public class Game{
     //Clear and initialize
     Text.hideCursor();
     Text.clear();
+    Scanner in = new Scanner(System.in);
+    String input = "";//blank to get into the main loop.
 
     ArrayList<String> names = new ArrayList<>(10);
     names.add("Bob"); names.add("Jeff"); names.add("Gerald"); names.add("George"); names.add("Juan");
@@ -225,9 +227,34 @@ public class Game{
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
     ArrayList<Adventurer> enemies = new ArrayList<Adventurer>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    enemies.add(createRandomAdventurer(names));
-    enemies.add(createRandomAdventurer(names));
-    enemies.add(createRandomAdventurer(names));
+    drawBackground();
+    String preprompt = "How many opponents would you like to face (1-3)";
+    TextBox(28, 2, 78, 1, preprompt);
+    while (true){
+      input = userInput(in);
+
+      if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){
+        quit();
+      }
+      if (input.equals("1")){
+        enemies.add(new Boss());
+        break;
+      }
+      if (input.equals("2")){
+        enemies.add(createRandomAdventurer(names));
+        enemies.add(createRandomAdventurer(names));
+        break;
+      }
+      if (input.equals("3")){
+        enemies.add(createRandomAdventurer(names));
+        enemies.add(createRandomAdventurer(names));
+        enemies.add(createRandomAdventurer(names));
+        break;
+      }
+
+    preprompt = "Please enter a valid amount of enemies (1-3)";
+    TextBox(28, 2, 78, 1, preprompt);
+    }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     //Adventurers you control:
@@ -243,8 +270,6 @@ public class Game{
     int whichPlayer = 0;
     int whichOpponent = 0;
     int turn = 0;
-    String input = "";//blank to get into the main loop.
-    Scanner in = new Scanner(System.in);
     String currentTurn = "";
     String pastTurn = "";
     String pastestTurn = "";
@@ -303,13 +328,18 @@ public class Game{
         } else if (input.startsWith("attack ") || input.startsWith("a ")){
           if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
             if (enemies.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
-              prompt = "Please enter a valid enemy name";
+              prompt = "Please enter a valid enemy number. Enter command for "+party.get(whichPlayer);
               TextBox(28, 2, 78, 1, prompt);
               continue game;
             }
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
             currentTurn = party.get(whichPlayer).attack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
+          }
+          else{
+            prompt = "Invalid number. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
+            TextBox(28, 2, 78, 1, prompt);
+            continue game;
           }
         }
         else if(input.equals("special") || input.equals("sp")){
@@ -344,20 +374,25 @@ public class Game{
           }
 
         } else if (input.startsWith("special ") || input.startsWith("sp ")){
-          if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
-            if (!(party.get(whichPlayer).getClass() == Priest.class) && enemies.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
-              prompt = "Please enter a valid enemy name";
+          if (party.get(whichPlayer).getClass() == Priest.class){
+            pastestTurn = pastTurn;
+            pastTurn = currentTurn;
+            currentTurn = ((Priest) party.get(whichPlayer)).specialAttack(party);
+          }
+          else if(Integer.parseInt(input.substring(input.length()-1)) < enemies.size()){
+            if (enemies.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
+              prompt = "Please enter a valid enemy number. Enter command for "+party.get(whichPlayer);
               TextBox(28, 2, 78, 1, prompt);
               continue game;
             }
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
-            if (party.get(whichPlayer).getClass() == Priest.class){
-              currentTurn = ((Priest) party.get(whichPlayer)).specialAttack(party);
-            }
-            else {
-              currentTurn = party.get(whichPlayer).specialAttack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
-            }
+            currentTurn = party.get(whichPlayer).specialAttack(enemies.get(Integer.parseInt(input.substring(input.length()-1))));
+          }
+          else{
+            prompt = "Invalid number. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
+            TextBox(28, 2, 78, 1, prompt);
+            continue game;
           }
         }
         else if(input.equals("su") || input.equals("support")){
@@ -386,13 +421,18 @@ public class Game{
         } else if (input.startsWith("support ") || input.startsWith("su ")){
           if(Integer.parseInt(input.substring(input.length()-1)) < party.size()){
             if (party.get(Integer.parseInt(input.substring(input.length()-1))).isDead()){
-              prompt = "Please enter a valid ally name";
+              prompt = "Please enter a valid ally number. Enter command for "+party.get(whichPlayer);
               TextBox(28, 2, 78, 1, prompt);
               continue game;
             }
             pastestTurn = pastTurn;
             pastTurn = currentTurn;
             currentTurn = party.get(whichPlayer).support(party.get(Integer.parseInt(input.substring(input.length()-1))));
+          }
+          else{
+            prompt = "Invalid number. Enter command for "+party.get(whichPlayer)+": attack/support/special/quit";
+            TextBox(28, 2, 78, 1, prompt);
+            continue game;
           }
         }
         else if (! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){

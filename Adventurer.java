@@ -98,6 +98,10 @@ public abstract class Adventurer{
     return baseDmg;
   }
 
+  public boolean isDead() {
+    return getHP() <= 0;
+  }
+
 
 
   //Set Methods
