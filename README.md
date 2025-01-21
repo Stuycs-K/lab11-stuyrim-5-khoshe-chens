@@ -15,13 +15,13 @@
 
 :ballot_box_with_check: added baseDmg to all Adventurer subclasses so an Adventurer's damage can be buffed
 
-:white_check_mark: if HP goes below 0, the character dies and can no longer attack or get attacked  (required)
+:white_check_mark: if HP goes below 0, the character dies and can no longer attack or get attacked
 
-:white_check_mark: program ends when player quits or all characters on a team is defeated (required)
+:white_check_mark: program ends when player quits or all characters on a team is defeated
 
-:white_check_mark: player is able to choose 1-3 opponents (required)
+:white_check_mark: player is able to choose 1-3 opponents
 
-:white_check_mark: when only one opponent is chosen, it is the boss (required)
+:white_check_mark: when only one opponent is chosen, it is the boss
 
 :white_check_mark: Necromancer attack/support/special
 
@@ -45,10 +45,8 @@
 
 :white_check_mark: HP never goes above maxHP 
 
-:question: run (missing special case for priest special attack when player's turn) (required)
+:white_check_mark: run
 
-
-pls delete this part when the checklist is completely updated
 :white_check_mark: This feature works.
 
 :question: This feature works partially.
