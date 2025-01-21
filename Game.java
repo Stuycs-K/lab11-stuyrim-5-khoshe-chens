@@ -28,7 +28,7 @@ public class Game{
     for (int i = 2; i < 30; i++){
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 1);
       drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 80);
-      if (!(i > 5 && i < 23) && i < 27){
+      if (!(i > 6 && i < 22) && i < 27){
         drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 27);
         drawText(Text.colorize(" ", BORDER_BACKGROUND), i, 53);
       } else if (i < 27){
@@ -37,8 +37,8 @@ public class Game{
       //drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), i, 1);
     }
 
-    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 5, 1);
-    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 23, 1);
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 6, 1);
+    drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 22, 1);
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 27, 1);
     drawText(Text.colorize("                                                                                ", BORDER_BACKGROUND), 30, 1);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -123,9 +123,10 @@ public class Game{
       for(int i = 0; i < party.size(); i++) {
         Adventurer current = party.get(i);
         drawText(current.getName(), startRow, 26 * i + 3);
-        drawText("HP: " + colorByPercent(current.getHP(), current.getmaxHP()), startRow + 1, 26 * i + 3);
+        drawText(current.getClass().getName(), startRow + 1, 26 * i + 3);
+        drawText("HP: " + colorByPercent(current.getHP(), current.getmaxHP()), startRow + 2, 26 * i + 3);
         String special = current.getSpecialName() + ": " + current.getSpecial();
-        drawText(special, startRow + 2, 26 * i + 3);
+        drawText(special, startRow + 3, 26 * i + 3);
 
       }
 
@@ -166,22 +167,22 @@ public class Game{
 
     drawParty(enemyParty, 2);
 
-    drawParty(playerParty, 24);
+    drawParty(playerParty, 23);
 
 
     //printing current players
-    TextBox(6, 2, 38, 6, currentTurn);
+    TextBox(7, 2, 38, 5, currentTurn);
 
     TextBox(12, 2, 38, 5, pastTurn);
 
-    TextBox(17, 2, 38, 6, pastestTurn);
+    TextBox(17, 2, 38, 5, pastestTurn);
 
     //print enemy turns
-    TextBox(6, 41, 38, 6, currentTurn1);
+    TextBox(7, 41, 38, 5, currentTurn1);
 
     TextBox(12, 41, 38, 5, pastTurn1);
 
-    TextBox(17, 41, 38, 6, pastestTurn1);
+    TextBox(17, 41, 38, 5, pastestTurn1);
 
     Text.go(29, 1);
 
