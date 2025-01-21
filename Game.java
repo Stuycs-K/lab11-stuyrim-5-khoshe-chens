@@ -124,7 +124,7 @@ public class Game{
         Adventurer current = party.get(i);
         drawText(current.getName(), startRow, 26 * i + 3);
         drawText(current.getClass().getName(), startRow + 1, 26 * i + 3);
-        drawText("HP: " + colorByPercent(current.getHP(), current.getmaxHP()), startRow + 2, 26 * i + 3);
+        drawText("HP: " + colorByPercent(current.getHP(), current.getmaxHP()) + " ", startRow + 2, 26 * i + 3);
         String special = current.getSpecialName() + ": " + current.getSpecial();
         drawText(special, startRow + 3, 26 * i + 3);
 

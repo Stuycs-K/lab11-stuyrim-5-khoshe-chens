@@ -84,7 +84,7 @@ public class Necromancer extends Adventurer{
 
   public String support(){
     this.setDmg(this.getDmg() + 3);
-    return this + " summoned skeletons to defend themselves and buffed their own damage by 3.";
+    return this + " summoned skeletons to defend themself and buffed their own damage by 3.";
   }
 
 }

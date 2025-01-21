@@ -3,37 +3,41 @@
 
 ## Features
 
-:ballot_box_with_check: added baseDmg to all Adventurer subclasses
 
-:question: Necromancer (need to finish story)
 
-:question: Priest
+:question: if HP goes below 0, the player dies
+
+:question: When all enemies or allies die, win/lose screen is displayed
+
+:question: boss has a 30% of showing up as an enemy
 
 :ballot_box_with_check: Asking for target based on name
 
-:white_check_mark: Enemies' Turn
+:ballot_box_with_check: added baseDmg to all Adventurer subclasses so an Adventurer's damage can be buffed
 
-:white_check_mark: Party's Turn
+:white_check_mark: Necromancer attack/support/special
 
-:white_check_mark: drawBackground
+:white_check_mark: Priest attack/support/special
 
-:white_check_mark: drawText
+:white_check_mark: Displaying player attacks in left box and enemy attacks on right box
 
-:white_check_mark: TextBox
+:white_check_mark: Enemies' Turn, press enter to see each move
 
-:white_check_mark: createRandomAdventurer
+:white_check_mark: Party's Turn, displays correctly, all damage is truncated to nearest integer
 
-:white_check_mark: drawParty
+:white_check_mark: drawBackground, drawText, TextBox, colorByPercent, createRandomAdventurer, userInput, quit
 
-:white_check_mark: colorByPercent
+:white_check_mark: every adventurer's name, type, HP, and special are displayed properly
 
-:white_check_mark: drawScreen
+:white_check_mark: drawScreen, text displays and clears correctly
 
-:white_check_mark: userInput
+:white_check_mark: HP never goes below 0
 
-:white_check_mark: quit
+:question: HP never goes above maxHP
 
-:question: run
+:ballot_box_with_check: adventurer names are randomly chosen from a list with no repeats
+
+:question: run (missing special case for priest special attack when player's turn)
 
 
 :white_check_mark: This feature works.
