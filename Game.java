@@ -160,7 +160,7 @@ public class Game{
   //Display the party and enemies
   //Do not write over the blank areas where text will appear.
   //Place the cursor at the place where the user will by typing their input at the end of this method.
-  public static void drawScreen(ArrayList<Adventurer> playerParty, ArrayList<Adventurer> enemyParty, String currentTurn, String pastTurn, String pastestTurn){
+  public static void drawScreen(ArrayList<Adventurer> playerParty, ArrayList<Adventurer> enemyParty, String currentTurn, String pastTurn, String pastestTurn, String currentTurn1, String pastTurn1, String pastestTurn1){
 
     drawBackground();
 
@@ -168,15 +168,26 @@ public class Game{
 
     drawParty(playerParty, 24);
 
+
+    //printing current players
     TextBox(6, 2, 38, 6, currentTurn);
 
     TextBox(12, 2, 38, 5, pastTurn);
 
     TextBox(17, 2, 38, 6, pastestTurn);
 
+    //print enemy turns
+    TextBox(6, 41, 38, 6, currentTurn1);
+
+    TextBox(12, 41, 38, 5, pastTurn1);
+
+    TextBox(17, 41, 38, 6, pastestTurn1);
+
     Text.go(29, 1);
 
   }
+
+
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
@@ -236,13 +247,16 @@ public class Game{
     String currentTurn = "";
     String pastTurn = "";
     String pastestTurn = "";
+    String enemyCurrentTurn = "";
+    String enemyPastTurn = "";
+    String enemyPastestTurn = "";
     int enemyMove;
     int enemyTarget;
     Random rand = new Random();
     //Draw the window border
 
     //You can add parameters to draw screen!
-    drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn);//initial state.
+    drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn, enemyCurrentTurn, enemyPastTurn, enemyPastestTurn);//initial state.
 
     //Main loop
 
@@ -366,7 +380,7 @@ public class Game{
 
         //You should decide when you want to re-ask for user input
         //If no errors:
-        drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn);
+        drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn, enemyCurrentTurn, enemyPastTurn, enemyPastestTurn);
         whichPlayer++;
 
 
@@ -398,28 +412,28 @@ public class Game{
         if (enemyMove == 0){
           enemyTarget = rand.nextInt(party.size());
 
-          pastestTurn = pastTurn;
-          pastTurn = currentTurn;
-          currentTurn = enemies.get(whichOpponent).attack(party.get(enemyTarget));
+          enemyPastestTurn = enemyPastTurn;
+          enemyPastTurn = enemyCurrentTurn;
+          enemyCurrentTurn = enemies.get(whichOpponent).attack(party.get(enemyTarget));
         }
         else if (enemyMove == 1){
           enemyTarget = rand.nextInt(enemies.size());
 
-          pastestTurn = pastTurn;
-          pastTurn = currentTurn;
-          currentTurn = enemies.get(whichOpponent).support(enemies.get(enemyTarget));
+          enemyPastestTurn = enemyPastTurn;
+          enemyPastTurn = enemyCurrentTurn;
+          enemyCurrentTurn = enemies.get(whichOpponent).support(enemies.get(enemyTarget));
         }
         else {
           enemyTarget = rand.nextInt(party.size());
 
-          pastestTurn = pastTurn;
-          pastTurn = currentTurn;
+          enemyPastestTurn = enemyPastTurn;
+          enemyPastTurn = enemyCurrentTurn;
           //add special attack if priest
           if (enemies.get(whichOpponent).getClass() == Priest.class){
-            currentTurn = ((Priest) enemies.get(whichOpponent)).specialAttack(enemies);
+            enemyCurrentTurn = ((Priest) enemies.get(whichOpponent)).specialAttack(enemies);
           }
           else {
-            currentTurn = enemies.get(whichOpponent).specialAttack(party.get(enemyTarget));
+            enemyCurrentTurn = enemies.get(whichOpponent).specialAttack(party.get(enemyTarget));
           }
         }
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -447,7 +461,7 @@ public class Game{
       }
 
       //display the updated screen after input has been processed.
-      drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn);
+      drawScreen(party, enemies, currentTurn, pastTurn, pastestTurn, enemyCurrentTurn, enemyPastTurn, enemyPastestTurn);
 
     }//end of main game loop
 
