@@ -47,7 +47,6 @@ public class Boss extends Adventurer{
     return this + " used Corrupting Touch on " + other + " and dealt " + damage + " damage by spreading darkness throughout their body.";
   }
 
-  //set targets health to 0.3 of what it originally was (rounds to integer if there is decimal)
   public String specialAttack(Adventurer other){
     if(getSpecial() >= 9){
       setSpecial(getSpecial()-9);
@@ -66,7 +65,7 @@ public class Boss extends Adventurer{
 
   }
 
-  //buffs damage of target by 3 hp (doesnt restore special)
+
   public String support(Adventurer other){
     //if(this == other) {
       //return this.support();
