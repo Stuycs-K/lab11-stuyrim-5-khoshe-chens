@@ -279,6 +279,8 @@ public class Game{
     int enemyMove;
     int enemyTarget;
     Random rand = new Random();
+    boolean enemiesAlive = true;
+    boolean partyAlive = true;
     //Draw the window border
 
     //You can add parameters to draw screen!
@@ -300,6 +302,26 @@ public class Game{
 
       //display event based on last turn's input
       if(partyTurn){
+
+        partyAlive = false;
+        for (Adventurer adv : party){
+          if (!adv.isDead()){
+            partyAlive = true;
+          }
+        }
+        if (!partyAlive){
+          quit();
+        }
+
+        enemiesAlive = false;
+        for (Adventurer adv : enemies){
+          if (!adv.isDead()){
+            enemiesAlive = true;
+          }
+        }
+        if (!enemiesAlive){
+          quit();
+        }
 
         //Process user input for the last Adventurer:
         if(input.equals("attack") || input.equals("a")){
@@ -478,6 +500,25 @@ public class Game{
       }else{
         //not the party turn!
 
+        partyAlive = false;
+        for (Adventurer adv : party){
+          if (!adv.isDead()){
+            partyAlive = true;
+          }
+        }
+        if (!partyAlive){
+          quit();
+        }
+
+        enemiesAlive = false;
+        for (Adventurer adv : party){
+          if (!adv.isDead()){
+            enemiesAlive = true;
+          }
+        }
+        if (!enemiesAlive){
+          quit();
+        }
 
         //enemy attacks a randomly chosen person with a randomly chosen attack.z`
         //Enemy action choices go here!
@@ -486,6 +527,9 @@ public class Game{
 
         if (enemyMove == 0){
           enemyTarget = rand.nextInt(party.size());
+          while (party.get(enemyTarget).isDead()){
+            enemyTarget = rand.nextInt(party.size());
+          }
 
           enemyPastestTurn = enemyPastTurn;
           enemyPastTurn = enemyCurrentTurn;
@@ -493,6 +537,9 @@ public class Game{
         }
         else if (enemyMove == 1){
           enemyTarget = rand.nextInt(enemies.size());
+          while (enemies.get(enemyTarget).isDead()){
+            enemyTarget = rand.nextInt(enemies.size());
+          }
 
           enemyPastestTurn = enemyPastTurn;
           enemyPastTurn = enemyCurrentTurn;
@@ -500,6 +547,9 @@ public class Game{
         }
         else {
           enemyTarget = rand.nextInt(party.size());
+          while (party.get(enemyTarget).isDead()){
+            enemyTarget = rand.nextInt(party.size());
+          }
 
           enemyPastestTurn = enemyPastTurn;
           enemyPastTurn = enemyCurrentTurn;
