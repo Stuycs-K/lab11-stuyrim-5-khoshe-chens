@@ -1,70 +1,95 @@
 public class Boss extends Adventurer{
   
-  int souls, soulsMax;
+  int voidEssence, voidEssenceMax;
 
   public Boss(String name, int hp) {
     super(name, hp);
-    soulsMax = 20;
-    souls = soulsMax/2;
+    voidEssenceMax = 20;
+    voidEssence = 9;
   }
 
-  public Necromancer(String name) {
-    this(name, 25);
+  public Boss(String name) {
+    this(name, 40);
   }
 
-  public Necromancer() {
-    this("Morty");
+  public Boss() {
+    this("Voldemort");
   }
   //add overloaded contructors if necessary
 
   public String getSpecialName() {
-    return "Souls";
+    return "Void Essence";
   }
 
   public int getSpecial() {
-    return souls;
+    return voidEssence;
   }
 
   public int getSpecialMax() {
-    return soulsMax;
+    return voidEssenceMax;
   }
 
   public void setSpecial(int n) {
-    souls = n;
+    voidEssence = n;
   }
 
 
   //attack/support/special
 
-  //Low percent based damage (deals random dmg from 10%-20% on opponent)
   public String attack(Adventurer other){
-    double percent = ((int) (Math.random()*2) + 1) * 0.05 + 0.1;
-    double damage =  other.getHP() * percent;
+    int damage = 5 + (int)(Math.random() * 3);
     damage += other.getDmg();
-    other.applyDamage((int) damage);
-    return this + " attacked " + other + " for " + damage + " damage.";
+    if (other.getHP() - damage < 0) {
+      other.setHP(0);
+    } else {
+      other.applyDamage(damage);
+    }
+    return this + " used Corrupting Touch on " + other + " and dealt " + damage + " damage by spreading darkness throughout their body.";
   }
 
   //set targets health to 0.3 of what it originally was (rounds to integer if there is decimal)
   public String specialAttack(Adventurer other){
-    if(this == other) {
-      return this.support();
+    if(getSpecial() >= 9){
+      setSpecial(getSpecial()-9);
+      int damage = 0;
+      setHP((int) (getHP() * 0.3));
+      damage += other.getDmg();
+      if (other.getHP() - damage < 0) {
+        other.setHP(0);
+      } else {
+        other.applyDamage(damage);
+      }
+      return this + " summoned black holes and took away 50% of " + other + "'s health.";
+    }else{
+      return this + " did not have enough void essence to summon black holes. Instead "+attack(other);
     }
-    setHP((int) (getHP() * 0.3));
-    return "Cast a spell to heal " + other + " by 5 hp.";
+
   }
 
   //buffs damage of target by 3 hp (doesnt restore special)
   public String support(Adventurer other){
-    if(this == other) {
-      return this.support();
+    //if(this == other) {
+      //return this.support();
+    //}
+    if (getHP() - 5 > 0) {
+      setHP(getHP() - 5);
+      setSpecial(getSpecial() + 7);
+      return this + " sacrificed 5 of their own hp in return for 7 void essence.";
     }
-    other.setDmg(other.getDmg() + 3);
-    return "Buffed " + other + " damage by 3.";
+    else {
+      setHP(getHP() + 5);
+      return this + " did not have enough health to perform Void Sacrifice. Instead they healed themself for 5 hp.";
+    }
   }
 
   public String support(){
-    this.setDmg(this.getDmg() + 3);
-    return "Buffed their own damage by 3.";
+    if (getHP() - 5 > 0) {
+      setHP(getHP() - 5);
+      setSpecial(getSpecial() + 7);
+      return this + " sacrificed 5 of their own hp in return for 7 void essence.";
+    } else {
+      return this + " did not have enough health to perform Void Sacrifice. Instead ";
+    }
+    
   }
 }

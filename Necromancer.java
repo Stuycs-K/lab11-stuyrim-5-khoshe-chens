@@ -58,7 +58,7 @@ public class Necromancer extends Adventurer{
     if(getSpecial() >= 9){
       setSpecial(getSpecial()-9);
       int damage = 0;
-      setHP((int) (getHP() * 0.3));
+      setHP((int) (getHP() * 0.7));
       damage += other.getDmg();
       if (other.getHP() - damage < 0) {
         other.setHP(0);

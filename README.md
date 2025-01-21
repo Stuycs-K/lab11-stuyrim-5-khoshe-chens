@@ -5,11 +5,15 @@
 
 
 
-:question: if HP goes below 0, the player dies
+:question: if HP goes below 0, the character dies and can no longer attack or get attacked  (required)
 
-:question: When all enemies or allies die, win/lose screen is displayed
+:question: program ends when player quits or all characters on a team is defeated (required)
 
-:question: boss has a 30% of showing up as an enemy
+:question: When all enemies or allies die, win/lose screen is displayed (extra)
+
+:question: player is able to choose 1-3 opponents (required)
+
+:question: when only one opponent is chosen, it is the boss (required)
 
 :ballot_box_with_check: Asking for target based on name
 
@@ -21,6 +25,8 @@
 
 :white_check_mark: Priest attack/support/special
 
+:question: Boss attack/support/special
+
 :white_check_mark: Displaying player attacks in left box and enemy attacks on right box
 
 :white_check_mark: Enemies' Turn, press enter to see each move
@@ -29,15 +35,15 @@
 
 :white_check_mark: drawBackground, drawText, TextBox, colorByPercent, createRandomAdventurer, userInput, quit
 
-:white_check_mark: every adventurer's name, type, HP, and special are displayed properly
+:white_check_mark: every adventurer's name, type, HP, and special are displayed properly inside border
 
 :white_check_mark: drawScreen, text displays and clears correctly
 
 :white_check_mark: HP never goes below 0
 
-:question: HP never goes above maxHP
+:question: HP never goes above maxHP (required)
 
-:question: run (missing special case for priest special attack when player's turn)
+:question: run (missing special case for priest special attack when player's turn) (required)
 
 
 pls delete this part when the checklist is completely updated
@@ -54,9 +60,9 @@ pls delete this part when the checklist is completely updated
 
 ## Adventurer Subclasses
 
-|**Adventurer Subclasses**|**Necromancer**|**Priest**|**blank(Boss)**|
+|**Adventurer Subclasses**|**Necromancer**|**Priest**|**Dark Lord(Boss)**|
 | --- | --- | --- | --- |
 |**Max HP**| 15 | 20 | 40 |
-|**Attack**| Staff drain: deals damage worth 10~20% of target's health|Holy Light: deals 1~3 damage to target | not set yet |
-|**Support**| Summons skeletons: buffs target's damage by 3| Healing spell: heals target by 5 hp| tbd|
-|**Special**| Death's Touch: sets target's health to 0.3 of what it originally was| Divine Grace: heals their own team by 3 hp and buffs everyone's damage by 2| tbd|
+|**Attack**| Staff Drain: deals damage worth 10~20% of target's health|Holy Light: deals 1~3 damage to target | Corrupting Touch: deals 5~7 damage to target |
+|**Support**| Summon Skeletons: buffs target's damage by 3| Healing Spell: heals target by 5 hp| Void Sacrifice: sacrifices 5 hp of its own for 7 void essence|
+|**Special**| Death's Touch: sets target's health to 0.7 of what it originally was| Divine Grace: heals their own team by 3 hp and buffs everyone's damage by 2| Black Hole: takes away 50% of target's health|
